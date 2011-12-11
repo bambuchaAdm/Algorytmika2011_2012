@@ -1,0 +1,30 @@
+Zadanie D2: Tort
+
+Alicja i Bob chcą zjeść prostokątny tort pokrojony na n kawałków. Na każdym z kawałków znajduje się pewna liczba wisienek. Alicja i Bob są amatorami wisienek i każde z nich przede wszystkim chce ich zjeść jak najwięcej. Uzgodnili, że będą na zmianę zjadać po jednym kawałku – aby jednak tort się nie rozpadł, kawałek musi być wyciągnięty z któregoś z końców ciasta.
+
+Jedzący są wyjątkowo sprytni i zawsze wykonują najlepszy możliwy ruch (najlepszy w kontekście całej konsumpcji, a niekoniecznie rzucając się od razu na najbardziej wartościowy kawałek). Rozpoczyna Alicja. Ile wisienek przypadnie jej w udziale?
+
+Dostępna pamięć: 16MB
+Wejście
+
+Pierwsza linia standardowego wejścia zawiera liczbę naturalną Z - liczbę zestawów danych. Opis jednego zestawu jest następujący:
+
+W pierwszej linii opisu znajduje się liczba naturalna n (3\le n\le 1000) – liczba kawałków, na które podzielony jest tort. W kolejnej linii znajduje się n liczb naturalnych z zakresu od 0 do 10^6, reprezentujących liczby wisienek na kolejnych kawałkach tortu.
+Wyjście
+
+Dla każdego zestawu danych wypisz (w oddzielnej linii) pojedynczą liczbę naturalną – liczbę wisienek, które zje Alicja, jeśli oboje grają optymalnie.
+Przykład
+Dla danych wejściowych: 	Poprawną odpowiedzią jest:
+
+2
+4
+5 8 5 4
+5
+1 7 2 8 3
+
+	
+
+12
+6
+
+
