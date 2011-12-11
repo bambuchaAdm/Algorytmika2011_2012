@@ -12,9 +12,7 @@ int jemy()
     scanf("%d",&dltortu);
     for(int i=0;i<dltortu;i++)
         scanf("%d",&tort[i][i].second);
-    for(int i=1;i<dltortu;i++)
-    {
-        for(int j=0;j<dltortu-i;j++)
+    for(int j=0, i=1;j<dltortu-i;j++)
         {
             //i+j,j
             if(tort[i+j-1][j].second>tort[i+j][j+1].second)
@@ -30,10 +28,28 @@ int jemy()
                 tort[i+j][j].second+=tort[i+j-1][j].second;
             }
         }
+    for(int i=2;i<dltortu;i++)
+    {
+        for(int j=0;j<dltortu-i;j++)
+        {
+            //i+j,j
+            if(tort[i+j-1][j].first>tort[i+j][j+1].first)
+            {
+                tort[i+j][j].first=tort[i+j-1][j].second;
+                tort[i+j][j].second=tort[i+j-1][j].first;
+                tort[i+j][j].first+=tort[i+j][i+j].second;
+            }
+            else
+            {
+                tort[i+j][j].first=tort[i+j][j+1].second;
+                tort[i+j][j].second=tort[i+j][j+1].first;
+                tort[i+j][j].first+=tort[j][j].second;
+            }
+        }
     }
     for(int i=0;i<MAX;i++)
         {for(int j=0;j<MAX;j++)
-            cout << tort[i][j].first <<"|" << tort[i][j].second << " ";
+            cout << tort[j][i].first <<"|" << tort[j][i].second << " ";
         cout << endl;}
     return tort[dltortu-1][0].first;
 }
