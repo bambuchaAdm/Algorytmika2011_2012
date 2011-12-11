@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const int MAX = 5;
+const int MAX = 1000;
 
 int jemy()
 {
@@ -12,46 +12,28 @@ int jemy()
     scanf("%d",&dltortu);
     for(int i=0;i<dltortu;i++)
         scanf("%d",&tort[i][i].second);
-    for(int j=0, i=1;j<dltortu-i;j++)
-        {
-            //i+j,j
-            if(tort[i+j-1][j].second>tort[i+j][j+1].second)
-            {
-                tort[i+j][j].first=tort[i+j-1][j].second;
-                tort[i+j][j].second=tort[i+j-1][j].first;
-                tort[i+j][j].second+=tort[i+j][j+1].second;
-            }
-            else
-            {
-                tort[i+j][j].first=tort[i+j][j+1].second;
-                tort[i+j][j].second=tort[i+j][j+1].first;
-                tort[i+j][j].second+=tort[i+j-1][j].second;
-            }
-        }
-    for(int i=2;i<dltortu;i++)
+    for(int i=1;i<dltortu;i++)
     {
         for(int j=0;j<dltortu-i;j++)
         {
-            //i+j,j
-            if(tort[i+j-1][j].first>tort[i+j][j+1].first)
+            pair<int,int> a,b;
+            a.first=tort[i+j-1][j].second;
+            a.second=tort[i+j-1][j].first;
+            b.first=tort[i+j][j+1].second;
+            b.second=tort[i+j][j+1].first;
+            a.second+=tort[i+j][i+j].second;
+            b.second+=tort[j][j].second;
+            if(a.second>b.second)
             {
-                tort[i+j][j].first=tort[i+j-1][j].second;
-                tort[i+j][j].second=tort[i+j-1][j].first;
-                tort[i+j][j].first+=tort[i+j][i+j].second;
+                tort[i+j][j]=a;
             }
             else
             {
-                tort[i+j][j].first=tort[i+j][j+1].second;
-                tort[i+j][j].second=tort[i+j][j+1].first;
-                tort[i+j][j].first+=tort[j][j].second;
+                tort[i+j][j]=b;
             }
         }
     }
-    for(int i=0;i<MAX;i++)
-        {for(int j=0;j<MAX;j++)
-            cout << tort[j][i].first <<"|" << tort[j][i].second << " ";
-        cout << endl;}
-    return tort[dltortu-1][0].first;
+    return tort[dltortu-1][0].second;
 }
 
 int main()
@@ -59,6 +41,6 @@ int main()
     int z=0;
     scanf("%d",&z);
     for(int i=0; i<z; i++)
-        printf("%d",jemy());
+        printf("%d\n",jemy());
     return 0;
 }
