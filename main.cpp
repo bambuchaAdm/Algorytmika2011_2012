@@ -1,9 +1,10 @@
 #include <iostream>
 #include <cstdio>
+#include <algorithm>
 
 using namespace std;
 
-const int MAX = 100;
+const int MAXI = 100;
 
 struct zloto
 {
@@ -14,7 +15,7 @@ struct zloto
 
 int kradnij()
 {
-    zloto tab[MAX];
+    zloto tab[MAXI];
     int lprzed=0, plecak=0;
     scanf("%d %d",&lprzed,&plecak);
     tab[0].waga=0;
@@ -25,7 +26,7 @@ int kradnij()
         scanf("%d %d",&tab[i].waga,&tab[i].wartosc);
         tab[i].numer=i;
     }
-    int pomoc[MAX][MAX];
+    int pomoc[MAXI][MAXI];
     for(int i=0;i<=lprzed;i++)
         pomoc[i][0]=0;
     for(int i=0;i<=lprzed;i++)
@@ -34,12 +35,13 @@ int kradnij()
     {
         for(int j=1;j<=plecak;j++)
         {
-            int wagtemp=plecak;
-            int biore=0, niebiore=0;
-            biore=tab[i].wartosc + pomoc[i-1][wagtemt-tab[i].waga];
+            if(j<tab[i].waga)
+                continue;
+            int biore = tab[i].wartosc + pomoc[i-1][j-tab[i].waga];
+            int niebiore = pomoc[i-1][j];
         }
     }
-    return -1;
+    return pomoc[plecak];
 }
 
 int main()
