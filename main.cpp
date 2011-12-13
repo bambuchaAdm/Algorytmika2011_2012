@@ -27,8 +27,12 @@ int kradnij()
     }
     int pomoc[MAX][MAX];
     for(int i=0;i<=lprzed;i++)
+        pomoc[i][0]=0;
+    for(int i=0;i<=lprzed;i++)
+        pomoc[0][i]=0;
+    for(int i=1;i<=lprzed;i++)
     {
-        for(int j=0;j<=plecak;j++)
+        for(int j=1;j<=plecak;j++)
         {
 
         }
