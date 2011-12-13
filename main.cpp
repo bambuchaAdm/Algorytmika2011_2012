@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int MAXI = 11;
+const int MAXI = 10001;
 
 struct zloto
 {
@@ -26,28 +26,21 @@ int kradnij()
         scanf("%d %d",&tab[i].waga,&tab[i].wartosc);
         tab[i].numer=i;
     }
-    int pomoc[MAXI][MAXI]={0};
-    /*for(int i=0;i<=lprzed;i++)
-        pomoc[i][0]=0;
-    for(int i=0;i<=lprzed;i++)
-        pomoc[0][i]=0;*/
+    int pomoc[MAXI][MAXI]={{0}};
     for(int i=1;i<=lprzed;i++)
     {
         for(int j=1;j<=plecak;j++)
         {
             if(j<tab[i].waga)
+            {
+                pomoc[i][j]=pomoc[i-1][j];
                 continue;
+            }
             int biore = tab[i].wartosc + pomoc[i-1][j-tab[i].waga];
             int niebiore = pomoc[i-1][j];
             pomoc[i][j]=max(biore,niebiore);
         }
     }
-
-    for(int i=0;i<MAXI;i++)
-        {for(int j=0;j<MAXI;j++)
-            cout << pomoc[i][j] << " ";
-        cout << endl;}
-        cout << endl;
     return pomoc[lprzed][plecak];
 }
 
