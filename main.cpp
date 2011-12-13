@@ -34,7 +34,9 @@ int kradnij()
     {
         for(int j=1;j<=plecak;j++)
         {
-
+            int wagtemp=plecak;
+            int biore=0, niebiore=0;
+            biore=tab[i].wartosc + pomoc[i-1][wagtemt-tab[i].waga];
         }
     }
     return -1;
