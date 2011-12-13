@@ -13,9 +13,10 @@ struct zloto
     int waga;
 };
 
+zloto tab[MAXI];
+
 int kradnij()
 {
-    zloto tab[MAXI];
     int lprzed=0, plecak=0;
     scanf("%d %d",&lprzed,&plecak);
     tab[0].waga=0;
