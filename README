@@ -1,0 +1,31 @@
+Zadanie D6: Diamenty
+
+Prostokątna plansza jest podzielona na h wierszy i w kolumn – w związku z tym znajduje się na niej w*h pól. Na niektórych z tych pól może się znajdować diament (co najwyżej jeden na jedno pole).
+
+Pionek startuje w lewym górnym rogu planszy. Jego zadaniem jest dojście do prawego dolnego rogu planszy poruszając się wyłącznie “w dół” lub “w prawo”. Innymi słowy pionek przechodzi do dolnego prawego rogu wykonując łącznie (w-1 + h-1) ruchów. W tym czasie pionek chce zebrać jak najwięcej diamentów.
+
+Twoim zadaniem jest obliczenie trasy podróży pozwalającej zebrać łącznie najwięcej diamentów.
+
+Dostępna pamięć: 32MB
+Wejście
+
+Pierwsza linia standardowego wejścia zawiera liczbę naturalną Z - liczbę zestawów danych. Opis jednego zestawu jest następujący:
+
+W pierwszym wierszu znajdują się dwie liczby w i h (1 \leq w, h \leq 1000) oznaczające odpowiednio ilość kolumn i wierszy na planszy. Kolejnych h wierszy zawiera opisy kolejnych wierszy planszy. Każdy wiersz opisany jest przez w liczb 0 lub 1 (pooddzielanych spacjami), mówiących czy na danym polu znajduje się diament. Wiersze podawane są od góry do dołu, natomiast pola wewnątrz wiersza od lewej do prawej.
+Wyjście
+
+Dla każdego zestawu danych wypisz (w oddzielnym wierszu) najpierw maksymalną liczbę diamentów, które można zebrać podczas podróży, a następnie ciąg (w-1 + h-1) znaków > lub v – zapis ścieżki, którą należy obrać. Jeśli istnieje wiele ścieżek z tą samą liczbą diamentów, możesz wypisać dowolną z nich.
+Przykład
+Dla danych wejściowych: 	Poprawną odpowiedzią jest:
+
+1
+4 3
+0 1 0 1
+0 1 1 1
+1 0 0 0
+
+	
+
+4 >v>>v
+
+
