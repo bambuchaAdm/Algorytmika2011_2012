@@ -1,0 +1,32 @@
+Zadanie D7: Neon¶
+/view/ProblemMapping/312296/statement_files/neon.jpg/neon.jpg
+
+W pewnym spokojnym mieście otwierane jest nowe centrum handlowe. Klientów witać ma wielki neon, widoczny nawet z odległych krańców miasta. Niestety, coś poszło nie tak, pomyłki się spiętrzyły i na neonie znajduje się zupełnie inny napis niż powinien. Przyciąga, i owszem, rzesze ludzi, ale ci zamiast robić zakupy, śmieją się z pomyłki bliźnich.
+
+Tak oczywiście pozostać nie może – neon trzeba przerobić na właściwy, minimalnym kosztem. Ile liter można pozostawić z obecnej wersji?
+
+Dostępna pamięć: 40MB
+Wejście
+
+Pierwsza linia standardowego wejścia zawiera liczbę naturalną Z - liczbę zestawów danych. W jedynej linii każdego zestawu znajdują się dwa ciągi znaków alfanumerycznych, oddzielone od siebie pojedynczą spacją – obecny oraz docelowy napis. Długość każdego z ciągów nie przekracza 3000.
+Wyjście
+
+Dla każdego zestawu danych wypisz dwie linie – w pierwszej maksymalną liczbę znaków, które można pozostawić, w drugiej przykładowy najdłuższy ciąg znaków, który znajduje się tak w starym, jak i w nowym napisie. Jeśli rozwiązań jest wiele, możesz wybrać dowolne z nich.
+Przykład
+Dla danych wejściowych: 	Możliwą odpowiedzią jest:
+
+3
+STOP SOTP
+YGU FY
+jd67H 8j9hy67h
+
+	
+
+3
+STP
+1
+Y
+3
+j67
+
+
