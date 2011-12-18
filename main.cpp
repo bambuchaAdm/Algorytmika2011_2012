@@ -14,7 +14,7 @@ struct pole
 
 pole pomoc[MAX][MAX];
 
-int liczpodciag()
+void liczpodciag()
 {
     string obecny;
     string docelowy;
@@ -60,13 +60,25 @@ int liczpodciag()
 
     for(int i=0;i<=y;i++)
         {for(int j=0;j<=x;j++)
-            {cout << pomoc[i][j].wartosc << " ";}cout << endl;}
-    return pomoc[y][x].wartosc;
-}
+            {cout << pomoc[i][j].kierunek << " ";}cout << endl;}
+    cout << pomoc[y][x].wartosc << endl;
 
-void odtworz_sciezke()
-{
-
+    string s;
+    int q = x, w = y;
+    int licznik = pomoc[y][x].wartosc;
+    while(licznik>0)
+    {
+        if(pomoc[q][w].kierunek==3)
+        {
+            s = docelowy[w] + s;
+            q--; w--; licznik--;
+        }
+        else if(pomoc[q][w].kierunek==2)
+            q--;
+        else if(pomoc[q][w].kierunek==1)
+            w--;
+    }
+    cout << s << endl;
 }
 
 int main()
@@ -74,8 +86,5 @@ int main()
     int z=0;
     scanf("%d",&z);
     for(int i=0;i<z;i++)
-    {
-        printf("%d\n",liczpodciag());
-        odtworz_sciezke();
-    }
+       liczpodciag();
 }
