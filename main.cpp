@@ -8,7 +8,7 @@ const int MAX = 3001;
 
 struct pole
 {
-    int wartosc;
+    short wartosc;
     short kierunek;
 };
 
@@ -57,15 +57,6 @@ void liczpodciag()
             }
         }
     }
-
-    /*for(int i=0;i<=y;i++)
-        {for(int j=0;j<=x;j++)
-            {cout << pomoc[i][j].kierunek << " ";}cout << endl;}
-    cout << pomoc[y][x].wartosc << endl;
-
-    for(int i=0;i<=y;i++)
-        {for(int j=0;j<=x;j++)
-            {cout << pomoc[i][j].wartosc << " ";}cout << endl;}*/
     cout << pomoc[y][x].wartosc << endl;
 
     string s;
@@ -73,7 +64,6 @@ void liczpodciag()
     int licznik = pomoc[y][x].wartosc;
     while(licznik>0)
     {
-        //cout << pomoc[q][w].kierunek;
         if(pomoc[w][q].kierunek==3)
         {
             s = docelowy[q-1] + s;
