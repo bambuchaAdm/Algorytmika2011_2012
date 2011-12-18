@@ -6,7 +6,13 @@ using namespace std;
 
 const int MAX = 3001;
 
-int pomoc[MAX][MAX] =  {{0}};
+struct pole
+{
+    int wartosc;
+    short kierunek;
+};
+
+pole pomoc[MAX][MAX] =  {{0}};
 
 int liczpodciag()
 {
