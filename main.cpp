@@ -69,20 +69,20 @@ void liczpodciag()
     cout << pomoc[y][x].wartosc << endl;
 
     string s;
-    int q = y, w = x;
+    int q = x, w = y;
     int licznik = pomoc[y][x].wartosc;
     while(licznik>0)
     {
         //cout << pomoc[q][w].kierunek;
-        if(pomoc[q][w].kierunek==3)
+        if(pomoc[w][q].kierunek==3)
         {
             s = docelowy[w] + s;
             q--; w--; licznik--;
             cout << "1";
         }
-        else if(pomoc[q][w].kierunek==2)
+        else if(pomoc[w][q].kierunek==2)
             {q--; cout << "2";}
-        else if(pomoc[q][w].kierunek==1)
+        else if(pomoc[w][q].kierunek==1)
             {w--; cout << "3";}
     }
     cout << s << "LOL" << endl;
