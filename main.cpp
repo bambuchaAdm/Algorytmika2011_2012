@@ -58,6 +58,9 @@ int liczpodciag()
         }
     }
 
+    for(int i=0;i<=y;i++)
+        {for(int j=0;j<=x;j++)
+            {cout << pomoc[j][i].wartosc << " ";}cout << endl;}
     return pomoc[x][y].wartosc;
 }
 
