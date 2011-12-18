@@ -63,22 +63,29 @@ void liczpodciag()
             {cout << pomoc[i][j].kierunek << " ";}cout << endl;}
     cout << pomoc[y][x].wartosc << endl;
 
+    for(int i=0;i<=y;i++)
+        {for(int j=0;j<=x;j++)
+            {cout << pomoc[i][j].wartosc << " ";}cout << endl;}
+    cout << pomoc[y][x].wartosc << endl;
+
     string s;
-    int q = x, w = y;
+    int q = y, w = x;
     int licznik = pomoc[y][x].wartosc;
     while(licznik>0)
     {
+        //cout << pomoc[q][w].kierunek;
         if(pomoc[q][w].kierunek==3)
         {
             s = docelowy[w] + s;
             q--; w--; licznik--;
+            cout << "1";
         }
         else if(pomoc[q][w].kierunek==2)
-            q--;
+            {q--; cout << "2";}
         else if(pomoc[q][w].kierunek==1)
-            w--;
+            {w--; cout << "3";}
     }
-    cout << s << endl;
+    cout << s << "LOL" << endl;
 }
 
 int main()
