@@ -76,16 +76,15 @@ void liczpodciag()
         //cout << pomoc[q][w].kierunek;
         if(pomoc[w][q].kierunek==3)
         {
-            s = docelowy[w] + s;
+            s = docelowy[q-1] + s;
             q--; w--; licznik--;
-            cout << "1";
         }
         else if(pomoc[w][q].kierunek==2)
-            {q--; cout << "2";}
+            {q--;}
         else if(pomoc[w][q].kierunek==1)
-            {w--; cout << "3";}
+            {w--;}
     }
-    cout << s << "LOL" << endl;
+    cout << s << endl;
 }
 
 int main()
