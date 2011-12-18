@@ -58,14 +58,14 @@ void liczpodciag()
         }
     }
 
-    for(int i=0;i<=y;i++)
+    /*for(int i=0;i<=y;i++)
         {for(int j=0;j<=x;j++)
             {cout << pomoc[i][j].kierunek << " ";}cout << endl;}
     cout << pomoc[y][x].wartosc << endl;
 
     for(int i=0;i<=y;i++)
         {for(int j=0;j<=x;j++)
-            {cout << pomoc[i][j].wartosc << " ";}cout << endl;}
+            {cout << pomoc[i][j].wartosc << " ";}cout << endl;}*/
     cout << pomoc[y][x].wartosc << endl;
 
     string s;
