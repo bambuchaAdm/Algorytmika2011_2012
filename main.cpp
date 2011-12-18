@@ -19,8 +19,8 @@ int liczpodciag()
     string obecny;
     string docelowy;
     cin >> obecny >> docelowy;
-    int x = docelowy.size()+1;
-    int y = obecny.size()+1;
+    int x = docelowy.size();
+    int y = obecny.size();
 
     for(int i=0;i<=x;i++)
         pomoc[i][0].wartosc = 0;
@@ -33,26 +33,26 @@ int liczpodciag()
         {
             if(obecny[j-1]==docelowy[i-1])
             {
-                pomoc[i][j].wartosc = 1 + pomoc[i-1][j-1].wartosc;
-                pomoc[i][j].kierunek = 3;
+                pomoc[j][i].wartosc = 1 + pomoc[j-1][i-1].wartosc;
+                pomoc[j][i].kierunek = 3;
             }
             else
             {
                 int lewo=0,gora=0;
-                gora = pomoc[i][j-1].wartosc;
-                lewo = pomoc[i-1][j-1].wartosc;
+                gora = pomoc[j][i-1].wartosc;
+                lewo = pomoc[j-1][i].wartosc;
                 if(gora < lewo)
                 {
-                    pomoc[i][j].kierunek = 1;
-                    pomoc[i][j].wartosc =lewo;
+                    pomoc[j][i].kierunek = 1;
+                    pomoc[j][i].wartosc =lewo;
                 }
                 else
                 {
                     if(j==1)
-                        pomoc[i][j].kierunek = 1;
+                        pomoc[j][i].kierunek = 1;
                     else
-                        pomoc[i][j].kierunek = 2;
-                    pomoc[i][j].wartosc = gora;
+                        pomoc[j][i].kierunek = 2;
+                    pomoc[j][i].wartosc = gora;
                 }
             }
         }
@@ -60,8 +60,8 @@ int liczpodciag()
 
     for(int i=0;i<=y;i++)
         {for(int j=0;j<=x;j++)
-            {cout << pomoc[j][i].wartosc << " ";}cout << endl;}
-    return pomoc[x][y].wartosc;
+            {cout << pomoc[i][j].wartosc << " ";}cout << endl;}
+    return pomoc[y][x].wartosc;
 }
 
 void odtworz_sciezke()
