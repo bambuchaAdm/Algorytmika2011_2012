@@ -6,13 +6,14 @@ using namespace std;
 
 const int MAX = 3001;
 
-struct pole
+/*struct pole
 {
     short wartosc;
     short kierunek;
-};
+};*/
 
-pole pomoc[MAX][MAX];
+short pomoc[MAX][MAX];
+short kierunek[MAX][MAX];
 
 void liczpodciag()
 {
@@ -23,9 +24,9 @@ void liczpodciag()
     int y = obecny.size();
 
     for(int i=0;i<=x;i++)
-        pomoc[i][0].wartosc = 0;
+        pomoc[i][0] = 0;
     for(int i=0;i<=y;i++)
-        pomoc[0][i].wartosc = 0;
+        pomoc[0][i] = 0;
 
     for(int j=1;j<=y;j++)
     {
@@ -33,45 +34,45 @@ void liczpodciag()
         {
             if(obecny[j-1]==docelowy[i-1])
             {
-                pomoc[j][i].wartosc = 1 + pomoc[j-1][i-1].wartosc;
-                pomoc[j][i].kierunek = 3;
+                pomoc[j][i] = 1 + pomoc[j-1][i-1];
+                kierunek[j][i] = 3;
             }
             else
             {
                 int lewo=0,gora=0;
-                gora = pomoc[j][i-1].wartosc;
-                lewo = pomoc[j-1][i].wartosc;
+                gora = pomoc[j][i-1];
+                lewo = pomoc[j-1][i];
                 if(gora < lewo)
                 {
-                    pomoc[j][i].kierunek = 1;
-                    pomoc[j][i].wartosc =lewo;
+                    kierunek[j][i] = 1;
+                    pomoc[j][i]=lewo;
                 }
                 else
                 {
                     if(j==1)
-                        pomoc[j][i].kierunek = 1;
+                        kierunek[j][i] = 1;
                     else
-                        pomoc[j][i].kierunek = 2;
-                    pomoc[j][i].wartosc = gora;
+                        kierunek[j][i] = 2;
+                    pomoc[j][i] = gora;
                 }
             }
         }
     }
-    cout << pomoc[y][x].wartosc << endl;
+    cout << pomoc[y][x] << endl;
 
     string s;
     int q = x, w = y;
-    int licznik = pomoc[y][x].wartosc;
+    int licznik = pomoc[y][x];
     while(licznik>0)
     {
-        if(pomoc[w][q].kierunek==3)
+        if(kierunek[w][q]==3)
         {
             s = docelowy[q-1] + s;
             q--; w--; licznik--;
         }
-        else if(pomoc[w][q].kierunek==2)
+        else if(kierunek[w][q]==2)
             {q--;}
-        else if(pomoc[w][q].kierunek==1)
+        else if(kierunek[w][q]==1)
             {w--;}
     }
     cout << s << endl;
