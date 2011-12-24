@@ -13,7 +13,7 @@ const int MAX = 3001;
 };*/
 
 short pomoc[MAX][MAX];
-short kierunek[MAX][MAX];
+//short kierunek[MAX][MAX];
 
 void liczpodciag()
 {
@@ -35,7 +35,7 @@ void liczpodciag()
             if(obecny[j-1]==docelowy[i-1])
             {
                 pomoc[j][i] = 1 + pomoc[j-1][i-1];
-                kierunek[j][i] = 3;
+              //  kierunek[j][i] = 3;
             }
             else
             {
@@ -44,15 +44,15 @@ void liczpodciag()
                 lewo = pomoc[j-1][i];
                 if(gora < lewo)
                 {
-                    kierunek[j][i] = 1;
+                  //  kierunek[j][i] = 1;
                     pomoc[j][i]=lewo;
                 }
                 else
                 {
-                    if(j==1)
-                        kierunek[j][i] = 1;
-                    else
-                        kierunek[j][i] = 2;
+                    //if(j==1)
+                       // kierunek[j][i] = 1;
+                   // else
+                      //  kierunek[j][i] = 2;
                     pomoc[j][i] = gora;
                 }
             }
@@ -60,22 +60,35 @@ void liczpodciag()
     }
     cout << pomoc[y][x] << endl;
 
-    string s;
+    string s = "";
     int q = x, w = y;
     int licznik = pomoc[y][x];
     while(licznik>0)
     {
-        if(kierunek[w][q]==3)
+        int g=0;
+        int d=0;
+        g = pomoc[w][q-1];
+        d = pomoc[w-1][q];
+        if(g==d)
         {
-            s = docelowy[q-1] + s;
-            q--; w--; licznik--;
+            s += obecny[w];
+            w--; q--;
+            licznik--;
+            cout << obecny[w] << endl;
         }
-        else if(kierunek[w][q]==2)
-            {q--;}
-        else if(kierunek[w][q]==1)
-            {w--;}
+        else
+        {
+            if(g>d)
+            {
+                q--; cout << "!"; continue;
+            }
+            else
+            {
+                w--; cout << "?"; continue;
+            }
+        }
     }
-    cout << s << endl;
+    cout << s;
 }
 
 int main()
