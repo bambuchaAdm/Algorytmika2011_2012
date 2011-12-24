@@ -65,30 +65,34 @@ void liczpodciag()
     int licznik = pomoc[y][x];
     while(licznik>0)
     {
+        if(docelowy[q-1]==obecny[w-1])
+        {
+            s = docelowy[q-1] + s;
+            w--; q--;
+            licznik--;
+            continue;
+        }
         int g=0;
         int d=0;
         g = pomoc[w][q-1];
         d = pomoc[w-1][q];
         if(g==d)
         {
-            s += obecny[w];
-            w--; q--;
-            licznik--;
-            cout << obecny[w] << endl;
+            q--; continue;
         }
         else
         {
             if(g>d)
             {
-                q--; cout << "!"; continue;
+                q--; continue;
             }
             else
             {
-                w--; cout << "?"; continue;
+                w--; continue;
             }
         }
     }
-    cout << s;
+    cout << s << endl;
 }
 
 int main()
