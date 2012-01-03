@@ -1,0 +1,27 @@
+Zadanie D8: Chorąży
+
+Chorążemu Szczurowi pod względem siły głosu daleko było do złożonego grypą sierżanta Momotka. Ale krzyczeć nie musiał, uczciwie wypracowana wśród żołnierzy ksywka “Cicha Śmierć” zapewniała mu absolutną ciszę w obrębie kilometra od placu zbiórek.
+
+- Zdawało mi się, że powiedziałem: od najniższego do najwyższego - prawie szeptem stwierdził chorąży - tak, pamiętam dobrze. A teraz ty tutaj przejdziesz na początek, ty tuż za tym wysokim, ty tam, a ty... o, proszę, jakie to łatwe. A za każdego przesuniętego dziesięć kółek wokół placu. I szybko, bo nie mam czasu.
+
+- Następnym razem - wycedził przez zęby szeregowy Formanek do pozostałych w okolicach osiemnastego okrążenia - miejsce zmieniają ci, którym dam wcześniej znać. Chyba że polubiliście bieganie?
+
+Wiedząc, jak stoją żołnierze, oblicz minimalną liczbę takich, którzy muszą zmienić pozycję, aby kompania stanęła w szeregu w porządku rosnącym.
+Wejście
+
+Pierwsza linia standardowego wejścia zawiera liczbę naturalną Z - liczbę zestawów danych. W pierwszej linii każdego zestawu znajduje się liczba naturalna n – stan kompanii (1 \leq n \leq 100000), zaś w drugiej – n liczb naturalnych a_1, a_2, \ldots ,a_n oznaczających wzrost żołnierzy (1 \leq a_i \leq 2 \cdot 10^9, a_i \neq a_j dla i \neq j).
+Wyjście
+
+Dla każdego zestawu wypisz w osobnej linii jedną liczbę – minimalną liczbę żołnierzy, których trzeba przestawić.
+Przykład
+Dla danych wejściowych: 	Poprawną odpowiedzią jest:
+
+1
+5
+172 191 179 185 188
+
+	
+
+1
+
+
