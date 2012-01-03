@@ -1,11 +1,10 @@
-#include <iostream>
 #include <cstdio>
 #include <algorithm>
 
 using namespace std;
 
-const int MAX = 100000;
-const int k8=2000000001;
+const int MAX = 100001; //w sumie to czemu +1? Bo upper na ostatni element by wyszedl poza tablice.
+const int k8 = 2000000001;
 
 void ustawiaj()
 {
