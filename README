@@ -1,0 +1,32 @@
+Zadanie D9+: Muszkieterowie
+
+W czasach Ludwika XIII i jego potężnego ministra, kardynała Richelieu, w gospodzie “Pod Pełnym Antałkiem” raczyło sie jadłem i winem n muszkieterów. Wina było pod dostatkiem, a że muszkieterowie byli skorzy do zwady, doszło do wielkiej awantury, w której każdy muszkieter obraził wszystkich pozostałych. Musiało dojść do pojedynków, ale kto miał się z kim pojedynkować i w jakiej kolejności? Uzgodnili (po raz pierwszy od awantury zrobili coś zgodnie), ze staną na okręgu w ustalonej kolejności i beda ciągnąć losy. Wylosowany muszkieter toczył pojedynek ze swoim sąsiadem z prawej. Przegrany “odpadał z gry”, a dokładniej - służący wynosili jego zwłoki. Sąsiadem wygrywającego stawał sie następny muszkieter, stojący za przegranym. Po latach, gdy historycy czytali wspomnienia zwycięzcy, spostrzegli, ze ostateczny wynik zależał w istotny sposób od kolejnosci wylosowanych pojedynków. Zauważyli bowiem, ze dotychczasowe treningi fechtunku pokazywały, kto z kim mógł wygrać pojedynek. Okazało się, że – mówiąc językiem matematycznym – relacja “A wygrywa z B” nie była przechodnia! Mogło się zdarzyć, ze muszkieter A walczył lepiej od muszkietera B, B lepiej od C, a C lepiej od A. Oczywiście wśród takiej trójki wybór pierwszego pojedynku decydował o ostatecznym wyniku! Jesli pierwsi będą walczyć A i B, to ostatecznie wygra C, ale jeśli pierwszymi bedą B i C, to ostatecznie wygra A. Historycy, zafascynowani tym odkryciem, postanowili sprawdzić, którzy muszkieterowie mogli przeżyć – od tego zależał przecież los Francji, a wraz z jej losem, los całej cywilizowanej Europy!
+
+Mając daną pełną tabelę potencjalnych wyników pojedynków (tzn. macierz A taką, że A_{i,j} = 1 wtedy i tylko wtedy, gdy muszkieter i-ty wygrywa z j-tym), oblicz, którzy muszkieterowie mogą zostać zwycięzcami.
+Wejście
+
+Pierwsza linia standardowego wejścia zawiera liczbę naturalną Z - liczbę zestawów danych. W pierwszym wierszu zestawu dana jest liczba całkowita n (3 \leq n \leq 100). W każdym z następnych n wierszy znajduje sie jedno słowo złożone z n znaków 0 lub 1. Znak stojący na j-tym miejscu w i-tym z tych wierszy oznacza wartość A_{i,j} (tzn. jeśli tym znakiem jest jedynka, to A_{i,j} = 1 , a jeśli zero, to A_{i,j} = 0). Oczywiście A_{i,j} = 1 - A_{j,i} dla i \neq j. Przyjmujemy, że A_{i,i} = 1 dla każdego i.
+Wyjście
+
+Dla każdego zestawu, w pierwszym wierszu odpowiedzi należy zapisać liczbę m tych osób, które mogą wygrać zawody. W następnych m wierszach należy zapisać numery tych osób w kolejności rosnącej, po jednym numerze w wierszu.
+Przykład
+Dla danych wejściowych: 	Poprawną odpowiedzią jest:
+
+1
+7
+1111101
+0101100
+0111111
+0001101
+0000101
+1101111
+0100001
+
+	
+
+3
+1
+3
+6
+
+
