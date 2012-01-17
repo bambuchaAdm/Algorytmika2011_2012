@@ -5,6 +5,7 @@
 using namespace std;
 
 const int MAX = 201;
+const int k8 = 200000001;
 
 int lwierzch;
 pair<int,int> wierch[MAX];
@@ -37,11 +38,17 @@ void trianguluj()
         wynik[i][(i+2)%lwierzch]=0;
     for(int i=0;i<lwierzch;i++)
     {
-        for(int j=3;i<lwierzch;i++)     //ew <=
+        for(int j=3;j<lwierzch;j++)     //ew <=
         {
+            wynik[i][(i+j)%lwierzch]=k8;
             for(int k=i;k<i+j;k++)
             {
-
+                int wposr = wynik[i][(i+k)%lwierzch] +
+                    wynik[(i+k+1)%lwierzch][(i+j)%lwierzch] +
+                    odleglosc(wierch[i], wierch[(i+k)%lwierzch]) +
+                    odleglosc(wierch[(i+k+1)%lwierzch]), wierch[(i+j)%lwierzch]);
+                if(wposr < wynik[i][j+i])
+                    wynik[i][j+i] = wposr;
             }
         }
     }
