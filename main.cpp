@@ -31,9 +31,9 @@ int odleglosc(pair<int,int> w, pair<int,int> w1)
 void rekonstruuj(int a, int b)
 {
     if(a>b)
-    if(lwierzch-a+b<=2)     //WTF!?
+    if((lwierzch-a+b)<=2)
         return;
-    else if(b-a<=2)
+    else if((b-a)<=2)
         return;
     int podzial = trasa[a][b];
     cout << podzial << " ";
@@ -43,11 +43,21 @@ void rekonstruuj(int a, int b)
 
 void odtworz(int i,int j)
 {
-    if(j<i){if((lwierzch-i+j)<=2){return;}}
-    else {if((j-i)<=2){return;}}
+    if(j<i)
+    {
+        if((lwierzch-i+j)<=2)
+        return;
+    }
+    else
+    {
+        if((j-i)<=2)
+        return;
+    }
     int k=trasa[i][j];
-    if((k-i)!=1&&(k-i)!=-1&&(k-i)!=-0)cout<<i<<" "<<k<<" ";
-    if((j-k)!=1&&(j-k)!=-1&&(j-k)!=-0)cout<<j<<" "<<k<<" ";
+    if((k-i)!=1&&(k-i)!=-1&&(k-i)!=-0)
+        cout<<i<<" "<<k<<" ";
+    if((j-k)!=1&&(j-k)!=-1&&(j-k)!=-0)
+        cout<<j<<" "<<k<<" ";
     odtworz(i,k);
     odtworz(k+1,j);
 }
@@ -81,14 +91,15 @@ void trianguluj()
         }
     }
     cout << endl << wynik[0][lwierzch-1] << " ";
-    /*for(int i=0;i<lwierzch;i++)
+    cout << endl;
+    for(int i=0;i<lwierzch;i++)
     {
         for(int j=0;j<lwierzch;j++)
             cout << wynik[i][j] << " ";
         cout << endl;
-    }*/
-    rekonstruuj(0,lwierzch-1);
-    //odtworz(0,lwierzch-1);
+    }
+    //rekonstruuj(0,lwierzch-1);
+    odtworz(0,lwierzch-1);
     /*for(int i=0;i<lwierzch;i++)
     {
         for(int j=0;j<lwierzch;j++)
