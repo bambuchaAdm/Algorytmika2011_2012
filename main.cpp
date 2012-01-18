@@ -95,8 +95,7 @@ void trianguluj()
                int wposr = wynik[i][(i+k)%lwierzch] +
                    wynik[(i+k+1)%lwierzch][(i+j)%lwierzch] +
                    odleglosc(wierch[i], wierch[(i+k)%lwierzch]) +
-                   odleglosc(wierch[(i+k+1)%lwierzch],
-wierch[(i+j)%lwierzch]);
+                   odleglosc(wierch[(i+k+1)%lwierzch], wierch[(i+j)%lwierzch]);
                if(wposr < wynik[i][(j+i)%lwierzch])
                {
                    wynik[i][(j+i)%lwierzch] = wposr;
@@ -106,12 +105,12 @@ wierch[(i+j)%lwierzch]);
        }
    }
    cout << endl << wynik[0][lwierzch-1] << " ";
-   //for(int i=0;i<lwierzch;i++)
-   //{
-   //    for(int j=0;j<lwierzch;j++)
-   //        cout << wynik[i][j] << " ";
-   //    cout << endl;
-   //}
+   for(int i=0;i<lwierzch;i++)
+   {
+       for(int j=0;j<lwierzch;j++)
+           cout << wynik[i][j] << " ";
+       cout << endl;
+   }
    //rekonstruuj(0,lwierzch-1);
    odtworz(0,lwierzch-1);
    /*for(int i=0;i<lwierzch;i++)
