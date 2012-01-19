@@ -90,13 +90,13 @@ void trianguluj()
         }
     }
     cout << endl << wynik[0][lwierzch-1] << " ";
-    /*cout << endl;
+    cout << endl;
     for(int i=0;i<lwierzch;i++)
     {
         for(int j=0;j<lwierzch;j++)
             cout << wynik[i][j] << " ";
         cout << endl;
-    }*/
+    }
     rekonstruuj(0,lwierzch-1);
 }
 
