@@ -27,9 +27,9 @@ void readInput()
 {
     cin >> wys >> szer;
     cin.ignore();
-    pole.resize(wys+1,vector<bool>(szer+1));
-    d.resize(wys+1,vector<punkt>(szer+1));
-    kwadrat.resize(wys+1,vector<int>(szer+1));
+    pole.resize(wys+10,vector<bool>(szer+10));
+    d.resize(wys+10,vector<punkt>(szer+10));
+    kwadrat.resize(wys+10,vector<int>(szer+10));
     for(int i=0;i<=szer;i++)
         kwadrat[0][i] = d[0][i].gora = d[0][i].lewo = 0;
     for(int i=0;i<=wys;i++)
@@ -38,16 +38,13 @@ void readInput()
     {
         string wiersz;
         getline(cin,wiersz);
-        //cout << wiersz << endl;
         for(int j=1;j<=szer;j++)
         {
-            //cout << wiersz[j-1] << " ";
             if(wiersz[j-1]=='x')
                 pole[i][j] = true;
             else
                 pole[i][j] = false;
         }
-        //cout << endl;
     }
 }
 
@@ -87,42 +84,13 @@ int min3(int a, int b, int c)
 
 void liczKwadraty()
 {
-    //punkt wynik; //wykorzystam sobie strukta do przechowywania wyniku. Gora - jak duzy, lewo - ile.
-    //wynik.gora = wynik.lewo = 0;
     for(int i=1;i<=wys;i++)
     {
         for(int j=1;j<=szer;j++)
         {
             kwadrat[i][j] = min3(d[i][j].gora,d[i][j].lewo,kwadrat[i-1][j-1]+1);
-            /*if(pole[i][j]==true)
-                continue;
-            int maxodl = 0;
-            int k = 0;
-            maxodl = min(d[i][j].gora, d[i][j].lewo);
-            if(maxodl < wynik.gora)
-                continue;
-            while(maxodl>0)
-            {
-                maxodl--;
-                k++;
-                if(d[i-k][j-k].gora >= maxodl && d[i-k][j-k].lewo >= maxodl)
-                    continue;
-                else
-                {
-                    maxodl = min(d[i-k][j-k].gora, d[i-k][j-k].lewo);
-                }
-            }
-
-            if(wynik.gora < k)
-            {
-                wynik.gora = k;
-                wynik.lewo = 1;
-            } else if(wynik.gora == k)
-                wynik.lewo++;
-            */
         }
     }
-    //return wynik;
 }
 
 pair<int,int> generujWynik()
@@ -151,18 +119,6 @@ void test()
         for(int j=0;j<=szer;j++)
         {
             cout << kwadrat[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
-
-void test1()
-{
-    for(int i=0;i<=wys;i++)
-    {
-        for(int j=0;j<=szer;j++)
-        {
-            cout << pole[i][j] << " ";
         }
         cout << endl;
     }
