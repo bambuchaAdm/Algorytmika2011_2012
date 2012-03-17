@@ -18,6 +18,7 @@ const int BRAK = -1;
 
 int vertices, edges;
 int czas = 0;
+int query = 0;
 
 vector<vector<int> > graf;
 vector<int> kolor;
@@ -107,6 +108,22 @@ void DFS(int n)
     visitVertex(n);
 }
 
+void generujDroge(int z, int cel)
+{
+
+}
+
+void readQuery()
+{
+    cin >> query;
+    for(int i=0;i<query;i++)
+    {
+        int z, cel;
+        cin >> z >> cel;
+        generujDroge(z,cel);
+    }
+}
+
 int main()
 {
     int z;
@@ -115,9 +132,8 @@ int main()
     {
         readInput();
         int korzen = ukorzen();
-        przodek[korzen] = BRAK;
+        parent[korzen] = BRAK;
         DFS(korzen);
-        printOutput();
         //test();
         clean();
     }
