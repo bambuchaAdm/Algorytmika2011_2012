@@ -1,3 +1,10 @@
+/**
+*   Author: Adam Piekarczyk
+*   Project Title: D11 - Marchewka
+*   School Year: 2011/2012
+*   School: VLO Kraków
+*   Class: 1e
+**/
 #include <iostream>
 #include <vector>
 #include <string>
@@ -76,28 +83,28 @@ punkt liczKwadraty()
     {
         for(int j=1;j<=szer;j++)
         {
-
+            if(pole[i][j]==true)
+                continue;
             int maxodl = 0;
             int k = 0;
             maxodl = min(d[i][j].gora, d[i][j].lewo);
-            maxodl--;
-            for(;k<=maxodl;k++)
+            while(maxodl>0)
             {
-                if(!(d[i-k][j-k].gora >= maxodl - k))
+                maxodl--;
+                k++;
+                if(d[i-k][j-k].gora >= maxodl && d[i-k][j-k].lewo >= maxodl)
+                    continue;
+                else
                 {
-                    maxodl = min(d[i-k][j-k].gora,maxodl);
-                }
-                if(!(d[i-k][j-k].lewo >= maxodl - k))
-                {
-                    maxodl = min(d[i-k][j-k].lewo,maxodl);
+                    maxodl = min(d[i-k][j-k].gora, d[i-k][j-k].lewo);
                 }
             }
+
             if(wynik.gora < k)
             {
                 wynik.gora = k;
                 wynik.lewo = 1;
-            }
-            if(wynik.gora == k)
+            } else if(wynik.gora == k)
                 wynik.lewo++;
         }
     }
