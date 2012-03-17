@@ -88,6 +88,8 @@ punkt liczKwadraty()
             int maxodl = 0;
             int k = 0;
             maxodl = min(d[i][j].gora, d[i][j].lewo);
+            if(maxodl < wynik.gora)
+                continue;
             while(maxodl>0)
             {
                 maxodl--;
