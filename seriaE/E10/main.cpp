@@ -66,7 +66,7 @@ void test()
 {
     for(int i=1;i<=vertices;i++)
     {
-        cout << pre[i] << " " /*<< in[i] << " "*/ << post[i] << endl;
+        cout << pre[i] << " " << in[i] << " " << post[i] << endl;
     }
 }
 
@@ -86,21 +86,47 @@ void visitVertex(int n)
     pre[n]=czas;
     kolor[n]=SZARY;
     bool war = false;
-    for(int i=0;i<graf[n].size();i++)
+    if(graf[n].size()==1)
     {
-        if(kolor[graf[n][i]]==BIALY)
+        czas++;
+        in[n] = czas;
+    }
+    else
+    {
+        for(int i=0;i<graf[n].size();i++)
         {
-            parent[graf[n][i]] = n;
-            /*if(!war)
-                lewy[n] = graf[n][i];
-            if(war)
+            if(kolor[graf[n][i]]==BIALY)
             {
-                czas++;
-                in[n] = czas;
-                prawy[n] = graf[n][i];
+                parent[graf[n][i]] = n;
+                if(!war)
+                {
+                    lewy[n] = graf[n][i];
+                    war = true;
+                }
+                else
+                {
+                    czas++;
+                    in[n] = czas;
+                    prawy[n] = graf[n][i];
+                }
+                visitVertex(graf[n][i]);
+                /*parent[graf[n][i]] = n;
+                if(!war)
+                    lewy[n] = graf[n][i];
+                if(war)
+                {
+                    czas++;
+                    in[n] = czas;
+                    prawy[n] = graf[n][i];
+                }
+                war = true;
+                visitVertex(graf[n][i]);
+                if(graf[n].size()==2)
+                {
+                    czas++;
+                    in[n] = czas;
+                }*/
             }
-            war = true;*/
-            visitVertex(graf[n][i]);
         }
     }
     kolor[n]=CZARNY;
