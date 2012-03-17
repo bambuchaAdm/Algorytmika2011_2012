@@ -52,6 +52,7 @@ void clean()
 {
     pole.clear();
     d.clear();
+    kwadrat.clear();
 }
 
 void liczOdleglosci()
