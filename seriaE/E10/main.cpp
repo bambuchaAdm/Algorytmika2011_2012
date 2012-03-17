@@ -49,6 +49,7 @@ void readInput()
         graf[a].push_back(b);
         graf[b].push_back(a);
     }
+    cerr << "READ INPUT DONE" << endl;
 }
 
 void clean()
@@ -58,11 +59,15 @@ void clean()
     pre.clear();
     in.clear();
     post.clear();
+    cerr << "CLEAN DONE" << endl;
 }
 
 void test()
 {
-
+    for(int i=1;i<=vertices;i++)
+    {
+        cout << pre[i] << " " /*<< in[i] << " "*/ << post[i] << endl;
+    }
 }
 
 int ukorzen()
@@ -72,6 +77,7 @@ int ukorzen()
         if(graf[i].size() < 3)
             return i;
     }
+    cout << "UKORZEN DONE" << endl;
 }
 
 void visitVertex(int n)
@@ -85,7 +91,7 @@ void visitVertex(int n)
         if(kolor[graf[n][i]]==BIALY)
         {
             parent[graf[n][i]] = n;
-            if(!war)
+            /*if(!war)
                 lewy[n] = graf[n][i];
             if(war)
             {
@@ -93,7 +99,7 @@ void visitVertex(int n)
                 in[n] = czas;
                 prawy[n] = graf[n][i];
             }
-            war = true;
+            war = true;*/
             visitVertex(graf[n][i]);
         }
     }
@@ -106,6 +112,7 @@ void DFS(int n)
 {
     czas = 0;
     visitVertex(n);
+    cerr << "DFS DONE" << endl;
 }
 
 void generujDroge(int z, int cel)
@@ -128,6 +135,7 @@ void generujDroge(int z, int cel)
     {
         generujDroge(parent[z],cel);
     }
+    cerr << "GENERUJ DROGE DONE" << endl;
 }
 
 void readQuery()
@@ -140,6 +148,7 @@ void readQuery()
         generujDroge(z,cel);
         cout << endl;
     }
+    cerr << "READ QUERY DONE" << endl;
 }
 
 int main()
@@ -152,7 +161,8 @@ int main()
         int korzen = ukorzen();
         parent[korzen] = BRAK;
         DFS(korzen);
-        //test();
+        test();
+        //readQuery();
         clean();
     }
 }
