@@ -21,6 +21,7 @@ int szer, wys;
 
 vector< vector<bool> > pole;
 vector< vector<punkt> > d; //distance
+vector< vector<int> > kwadrat;
 
 void readInput()
 {
@@ -28,10 +29,11 @@ void readInput()
     cin.ignore();
     pole.resize(wys+1,vector<bool>(szer+1));
     d.resize(wys+1,vector<punkt>(szer+1));
+    kwadrat.resize(wys+1,vector<int>(szer+1));
     for(int i=0;i<=szer;i++)
-        d[0][i].gora = d[0][i].lewo = 0;
+        kwadrat[0][i] = d[0][i].gora = d[0][i].lewo = 0;
     for(int i=0;i<=wys;i++)
-        d[i][0].gora = d[i][0].lewo = 0;
+        kwadrat[i][0] = d[i][0].gora = d[i][0].lewo = 0;
     for(int i=1;i<=wys;i++)
     {
         string wiersz;
@@ -75,15 +77,24 @@ void liczOdleglosci()
     }
 }
 
-punkt liczKwadraty()
+int min3(int a, int b, int c)
 {
-    punkt wynik; //wykorzystam sobie strukta do przechowywania wyniku. Gora - jak duzy, lewo - ile.
-    wynik.gora = wynik.lewo = 0;
+    int wynik = 0;
+    wynik = min(a,b);
+    wynik = min(wynik,c);
+    return wynik;
+}
+
+void liczKwadraty()
+{
+    //punkt wynik; //wykorzystam sobie strukta do przechowywania wyniku. Gora - jak duzy, lewo - ile.
+    //wynik.gora = wynik.lewo = 0;
     for(int i=1;i<=wys;i++)
     {
         for(int j=1;j<=szer;j++)
         {
-            if(pole[i][j]==true)
+            kwadrat[i][j] = min3(d[i][j].gora,d[i][j].lewo,kwadrat[i-1][j-1]+1);
+            /*if(pole[i][j]==true)
                 continue;
             int maxodl = 0;
             int k = 0;
@@ -108,6 +119,26 @@ punkt liczKwadraty()
                 wynik.lewo = 1;
             } else if(wynik.gora == k)
                 wynik.lewo++;
+            */
+        }
+    }
+    //return wynik;
+}
+
+pair<int,int> generujWynik()
+{
+    pair<int,int> wynik;
+    wynik.first = wynik.second = 0;
+    for(int i=1;i<=wys;i++)
+    {
+        for(int j=1;j<=szer;j++)
+        {
+            if(kwadrat[i][j] > wynik.first)
+            {
+                wynik.first = kwadrat[i][j];
+                wynik.second = 1;
+            } else if(kwadrat[i][j] == wynik.first)
+                wynik.second++;
         }
     }
     return wynik;
@@ -115,22 +146,11 @@ punkt liczKwadraty()
 
 void test()
 {
-    cout << "W GORE" << endl;
     for(int i=0;i<=wys;i++)
     {
         for(int j=0;j<=szer;j++)
         {
-            cout << d[i][j].gora << " ";
-        }
-        cout << endl;
-    }
-
-    cout << "W LEWO" << endl;
-    for(int i=0;i<=wys;i++)
-    {
-        for(int j=0;j<=szer;j++)
-        {
-            cout << d[i][j].lewo << " ";
+            cout << kwadrat[i][j] << " ";
         }
         cout << endl;
     }
@@ -157,9 +177,9 @@ int main()
         readInput();
         //test1();
         liczOdleglosci();
-        //test();
-        punkt wynik = liczKwadraty();
-        cout << wynik.gora << " " << wynik.lewo << endl;
+        liczKwadraty();
+        pair<int,int> wynik = generujWynik();
+        cout << wynik.first << " " << wynik.second << endl;
         clean();
     }
     return 0;
