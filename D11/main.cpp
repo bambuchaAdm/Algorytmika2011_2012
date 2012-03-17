@@ -60,7 +60,7 @@ void liczOdleglosci()
     }
 }
 
-void liczKwadraty()
+punkt liczKwadraty()
 {
     punkt wynik; //wykorzystam sobie strukta do przechowywania wyniku. Gora - jak duzy, lewo - ile.
     wynik.gora = wynik.lewo = 0;
@@ -70,14 +70,30 @@ void liczKwadraty()
         {
 
             int maxodl = 0;
+            int k = 0;
             maxodl = min(d[i][j].gora, d[i][j].lewo);
             maxodl--;
-            for(int k=0;k<maxodl;k++)
+            for(;k<=maxodl;k++)
             {
-
+                if(!(d[i-k][j-k].gora >= maxodl - k))
+                {
+                    maxodl = min(d[i-k][j-k].gora,maxodl);
+                }
+                if(!(d[i-k][j-k].lewo >= maxodl - k))
+                {
+                    maxodl = min(d[i-k][j-k].lewo,maxodl);
+                }
             }
+            if(wynik.gora < k)
+            {
+                wynik.gora = k;
+                wynik.lewo = 1;
+            }
+            if(wynik.gora == k)
+                wynik.lewo++;
         }
     }
+    return wynik;
 }
 
 int main()
@@ -88,7 +104,8 @@ int main()
     {
         readInput();
         liczOdleglosci();
-        liczKwadraty();
+        punkt wynik = liczKwadraty();
+        cout << wynik.gora << " " << wynik.lewo << endl;
         clean();
     }
     return 0;
