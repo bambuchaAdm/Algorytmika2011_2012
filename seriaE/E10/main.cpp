@@ -110,7 +110,24 @@ void DFS(int n)
 
 void generujDroge(int z, int cel)
 {
-
+    cout << z << " ";
+    if(z==cel)
+        return;
+    if(pre[cel] >= pre[z] && post[cel] <= pre[z])
+    {
+        if(in[cel] < in[z])
+        {
+            generujDroge(lewy[z],cel);
+        }
+        else
+        {
+            generujDroge(prawy[z],cel);
+        }
+    }
+    else
+    {
+        generujDroge(parent[z],cel);
+    }
 }
 
 void readQuery()
@@ -121,6 +138,7 @@ void readQuery()
         int z, cel;
         cin >> z >> cel;
         generujDroge(z,cel);
+        cout << endl;
     }
 }
 
