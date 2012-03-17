@@ -17,7 +17,7 @@ const int CZARNY = 3;
 const int BRAK = -1;
 
 int vertices, edges;
-int time = 0;
+int czas = 0;
 
 vector<vector<int> > graf;
 vector<int> kolor;
@@ -26,7 +26,7 @@ vector<int> in;
 vector<int> post;
 vector<int> lewy;
 vector<int> prawy;
-vector<int> przodek;
+vector<int> parent;
 
 void readInput()
 {
@@ -39,7 +39,7 @@ void readInput()
     post.resize(MAX);
     lewy.resize(MAX);
     prawy.resize(MAX);
-    przodek.resize(MAX);
+    parent.resize(MAX);
     kolor.resize(MAX,BIALY);
     for(int i=0;i<edges;i++)
     {
@@ -68,29 +68,42 @@ int ukorzen()
 {
     for(int i=1;i<vertices;i++)
     {
-        if(graf[i].size < 3)
+        if(graf[i].size() < 3)
             return i;
     }
 }
 
 void visitVertex(int n)
 {
-    time++;
-    pre[n]=time;
+    czas++;
+    pre[n]=czas;
     kolor[n]=SZARY;
     bool war = false;
     for(int i=0;i<graf[n].size();i++)
     {
         if(kolor[graf[n][i]]==BIALY)
         {
-
+            parent[graf[n][i]] = n;
+            if(!war)
+                lewy[n] = graf[n][i];
+            if(war)
+            {
+                czas++;
+                in[n] = czas;
+                prawy[n] = graf[n][i];
+            }
+            war = true;
+            visitVertex(graf[n][i]);
         }
     }
+    kolor[n]=CZARNY;
+    czas++;
+    post[n] = czas;
 }
 
 void DFS(int n)
 {
-    time = 0;
+    czas = 0;
     visitVertex(n);
 }
 
