@@ -39,9 +39,9 @@ void printOutput(bool war)
         for(int i=1;i<=lkoral;i++)
         {
             if(ok[i][0])
-                printf("%c ",naszyjnik[i][0]);
+                printf("%c",naszyjnik[i][0]);
             else
-                printf("%c ",naszyjnik[i][1]);
+                printf("%c",naszyjnik[i][1]);
         }
         printf("\n");
     }
@@ -84,7 +84,7 @@ bool ukladajKorale(bool a, bool b)
             ok[i][j] = (ok[i-1][0] && naszyjnik[i][j] != naszyjnik[i-1][0]) || (ok[i-1][1] && naszyjnik[i][j] != naszyjnik[i-1][1]);
         }
     }
-    if(ok[lkoral][0] || ok[lkoral][1])
+    if((ok[lkoral][0] && ok[lkoral][0]==ok[0][0]) || (ok[lkoral][1] && ok[lkoral][1]==ok[0][1]))
         return true;
     return false;
 }
@@ -96,24 +96,24 @@ int main()
     for(int i=0;i<z;i++)
     {
         readInput();
-        test1();/*
+        //test1();
         if(ukladajKorale(true,false))
         {
-            test();
+            //test();
             printOutput(true);
             clean();
             continue;
         }
         else if(ukladajKorale(false,true))
         {
-            test();
+            //test();
             printOutput(true);
             clean();
             continue;
         }
-        test();
+        //test();
         printOutput(false);
-        clean();*/
+        clean();
     }
     return 0;
 }
