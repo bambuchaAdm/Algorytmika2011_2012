@@ -32,17 +32,21 @@ void readInput()
     naszyjnik[0][1] = naszyjnik[lkoral][1];
 }
 
-void printOutput(bool war)
+void printOutput(bool war, bool war1, bool war2)
 {
     if(war)
     {
-        for(int i=1;i<=lkoral;i++)
+        for(int i=1;i<lkoral;i++)
         {
             if(ok[i][0])
                 printf("%c",naszyjnik[i][0]);
             else
                 printf("%c",naszyjnik[i][1]);
         }
+        if(war1 && ok[lkoral][0])
+            cout << naszyjnik[lkoral][0];
+        if(war2 && ok[lkoral][1])
+            cout << naszyjnik[lkoral][1];
         printf("\n");
     }
     else
@@ -100,19 +104,19 @@ int main()
         if(ukladajKorale(true,false))
         {
             //test();
-            printOutput(true);
+            printOutput(true,true,false);
             clean();
             continue;
         }
         else if(ukladajKorale(false,true))
         {
-            //test();
-            printOutput(true);
+          //  test();
+            printOutput(true,false,true);
             clean();
             continue;
         }
         //test();
-        printOutput(false);
+        printOutput(false,true,true);
         clean();
     }
     return 0;
