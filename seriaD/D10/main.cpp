@@ -39,7 +39,7 @@ void printOutput(bool war)
         {
             if(ok[i][0])
                 printf("%c ",naszyjnik[i][0]);
-            if(ok[i][1])
+            else
                 printf("%c ",naszyjnik[i][1]);
         }
         printf("\n");
@@ -48,7 +48,6 @@ void printOutput(bool war)
     {
         printf("-\n");
     }
-
 }
 
 void clean()
@@ -59,7 +58,11 @@ void clean()
 
 void test()
 {
-
+    for(int i=0;i<=lkoral;i++)
+        cout << ok[i][0];
+    cout << endl;
+    for(int i=0;i<=lkoral;i++)
+        cout << ok[i][0];
 }
 
 bool ukladajKorale(bool a, bool b)
@@ -86,13 +89,20 @@ int main()
     {
         readInput();
         if(ukladajKorale(true,false))
+        {
             printOutput(true);
+            clean();
+            continue;
+        }
         else if(ukladajKorale(false,true))
         {
             printOutput(true);
+            clean();
+            continue;
         }
         printOutput(false);
         //test();
         clean();
     }
+    return 0;
 }
