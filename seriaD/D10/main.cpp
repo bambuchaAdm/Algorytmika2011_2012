@@ -20,7 +20,9 @@ vector<vector<bool> > ok;
 void readInput()
 {
     scanf("%d",&lkoral);
-    naszyjnik.resize(lkoral+1,vector<char>(2));
+    const int MAX = lkoral+1;
+    naszyjnik.resize(MAX,vector<char>(2));
+    ok.resize(MAX,vector<bool>(2,false)); //ciekawe czy to dziala
     for(int i=1;i<=lkoral;i++)
     {
         scanf("%c %c",&naszyjnik[i][0],&naszyjnik[i][1]);
@@ -29,19 +31,51 @@ void readInput()
     naszyjnik[0][1] = naszyjnik[lkoral][1];
 }
 
-void printOutput()
+void printOutput(bool war)
 {
+    if(war)
+    {
+        for(int i=1;i<=lkoral;i++)
+        {
+            if(ok[i][0])
+                printf("%c ",naszyjnik[i][0]);
+            if(ok[i][1])
+                printf("%c ",naszyjnik[i][1]);
+        }
+        printf("\n");
+    }
+    else
+    {
+        printf("-\n");
+    }
 
 }
 
 void clean()
 {
-
+    naszyjnik.clear();
+    ok.clear();
 }
 
 void test()
 {
 
+}
+
+bool ukladajKorale(bool a, bool b)
+{
+    ok[0][0] = a;
+    ok[0][1] = b;
+    for(int i=1;i<=lkoral;i++)
+    {
+        for(int j=0;j<2;j++)
+        {
+            ok[i][j] = (ok[i-1][0] && naszyjnik[i][j] != naszyjnik[i-1][0]) || (ok[i-1][1] && naszyjnik[i][j] != naszyjnik[i-1][1]);
+        }
+    }
+    if(ok[lkoral][0] || ok[lkoral][1])
+        return true;
+    return false;
 }
 
 int main()
@@ -51,8 +85,13 @@ int main()
     for(int i=0;i<z;i++)
     {
         readInput();
-
-        printOutput();
+        if(ukladajKorale(true,false))
+            printOutput(true);
+        else if(ukladajKorale(false,true))
+        {
+            printOutput(true);
+        }
+        printOutput(false);
         //test();
         clean();
     }
