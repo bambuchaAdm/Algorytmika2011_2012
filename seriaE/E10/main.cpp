@@ -18,7 +18,6 @@ const int BRAK = -1;
 
 int vertices, edges;
 int czas = 0;
-int query = 0;
 
 vector<vector<int> > graf;
 vector<int> kolor;
@@ -59,6 +58,9 @@ void clean()
     pre.clear();
     in.clear();
     post.clear();
+    lewy.clear();
+    prawy.clear();
+    parent.clear();
     //cerr << "CLEAN DONE" << endl;
 }
 
@@ -153,6 +155,7 @@ void generujDroge(int z, int cel)
 
 void readQuery()
 {
+    int query;
     cin >> query;
     for(int i=0;i<query;i++)
     {
