@@ -25,7 +25,8 @@ void readInput()
     ok.resize(MAX,vector<bool>(2,false)); //ciekawe czy to dziala
     for(int i=1;i<=lkoral;i++)
     {
-        scanf("%c %c",&naszyjnik[i][0],&naszyjnik[i][1]);
+        //scanf("%c %c",&naszyjnik[i][0],&naszyjnik[i][1]);     //czemu to nie dziala? Zapytac kogos.
+        cin >> naszyjnik[i][0] >> naszyjnik[i][1];
     }
     naszyjnik[0][0] = naszyjnik[lkoral][0];
     naszyjnik[0][1] = naszyjnik[lkoral][1];
@@ -62,7 +63,14 @@ void test()
         cout << ok[i][0];
     cout << endl;
     for(int i=0;i<=lkoral;i++)
-        cout << ok[i][0];
+        cout << ok[i][1];
+    cout << endl;
+}
+
+void test1()
+{
+    for(int i=0;i<=lkoral;i++)
+        cout << naszyjnik[i][0] << " " << naszyjnik[i][1] << endl;
 }
 
 bool ukladajKorale(bool a, bool b)
@@ -88,21 +96,24 @@ int main()
     for(int i=0;i<z;i++)
     {
         readInput();
+        test1();/*
         if(ukladajKorale(true,false))
         {
+            test();
             printOutput(true);
             clean();
             continue;
         }
         else if(ukladajKorale(false,true))
         {
+            test();
             printOutput(true);
             clean();
             continue;
         }
+        test();
         printOutput(false);
-        //test();
-        clean();
+        clean();*/
     }
     return 0;
 }
