@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cstdio>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -16,12 +17,14 @@ int lkoral;
 
 vector<vector<char> > naszyjnik;
 vector<vector<bool> > ok;
+vector<vector<int> > skad;
 
 void readInput()
 {
     scanf("%d",&lkoral);
     const int MAX = lkoral+1;
     naszyjnik.resize(MAX,vector<char>(2));
+    skad.resize(MAX,vector<int>(2));
     ok.resize(MAX,vector<bool>(2,false)); //ciekawe czy to dziala
     for(int i=1;i<=lkoral;i++)
     {
@@ -32,26 +35,18 @@ void readInput()
     naszyjnik[0][1] = naszyjnik[lkoral][1];
 }
 
-void printOutput(bool war, bool war1, bool war2)
+void printOutput()
 {
-    if(war)
+    stack<char> S;
+    if(ok[lkoral][0])
     {
-        for(int i=1;i<lkoral;i++)
+        int poprz = 0;
+        S.push(naszyjnik[lkoral][0]);
+        for(int i=lkoral;i>1;i--)
         {
-            if(ok[i][0])
-                printf("%c",naszyjnik[i][0]);
-            else
-                printf("%c",naszyjnik[i][1]);
+            S.push(naszyjnik[i-1][skad[i][poprz]]);
+            poprz = skad[i][poprz];
         }
-        if(war1 && ok[lkoral][0])
-            cout << naszyjnik[lkoral][0];
-        if(war2 && ok[lkoral][1])
-            cout << naszyjnik[lkoral][1];
-        printf("\n");
-    }
-    else
-    {
-        printf("-\n");
     }
 }
 
@@ -85,12 +80,24 @@ bool ukladajKorale(bool a, bool b)
     {
         for(int j=0;j<2;j++)
         {
-            ok[i][j] = (ok[i-1][0] && naszyjnik[i][j] != naszyjnik[i-1][0]) || (ok[i-1][1] && naszyjnik[i][j] != naszyjnik[i-1][1]);
+            if(ok[i-1][0] && naszyjnik[i][j] != naszyjnik[i-1][0])
+            {
+                ok[i][j] = true;
+                skad[i][j] = 0;
+            }
+            else if(ok[i-1][1] && naszyjnik[i][j] != naszyjnik[i-1][1])
+            {
+                ok[i][j] = true;
+                skad[i][j] = 1;
+            }
+        }
+        if((!ok[i][0]) && (!ok[i][1]))
+        {
+            cout << "-" << endl;
+            return false;
         }
     }
-    if((ok[lkoral][0] && ok[lkoral][0]==ok[0][0]) || (ok[lkoral][1] && ok[lkoral][1]==ok[0][1]))
-        return true;
-    return false;
+    return true;
 }
 
 int main()
@@ -104,20 +111,17 @@ int main()
         if(ukladajKorale(true,false))
         {
             //test();
-            printOutput(true,true,false);
+            printOutput();
             clean();
             continue;
         }
         else if(ukladajKorale(false,true))
         {
-          //  test();
-            printOutput(true,false,true);
+            //test();
+            printOutput();
             clean();
             continue;
         }
-        //test();
-        printOutput(false,true,true);
-        clean();
     }
     return 0;
 }
