@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1322165981 source:/home/adam/programowanie/algorytmika/seriaC/C5/main.cpp
+	<cstdio>
+	<vector>
+	<iostream>
+

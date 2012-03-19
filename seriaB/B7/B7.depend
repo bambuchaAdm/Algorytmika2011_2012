@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1319310967 source:/home/adam/programowanie/algorytmika/seriaB/B7/main.cpp
+	<cstdio>
+	<set>
+	<cmath>
+	<iostream>
+
+1319389484 source:/home/adam/programowanie/algorytmika/seriaB/B7/main1.cpp
+	<set>
+	<queue>
+	<iostream>
+

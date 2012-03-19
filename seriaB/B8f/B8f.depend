@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1319575261 source:/home/adam/programowanie/algorytmika/seriaB/B8f/main.cpp
+	<iostream>
+	<cstdio>
+

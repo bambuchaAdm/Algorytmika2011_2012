@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1321988218 source:/home/adam/programowanie/algorytmika/seriaB/B9+/main.cpp
+	<iostream>
+	<cstdio>
+	<vector>
+

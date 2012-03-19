@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1318962169 source:/home/adam/programowanie/algorytmika/seriaB/B5/main.cpp
+	<iostream>
+	<cstdio>
+	<deque>
+	<queue>
+

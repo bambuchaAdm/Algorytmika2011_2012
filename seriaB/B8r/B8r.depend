@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1320597991 source:/home/adam/programowanie/cpp/B8r/main.cpp
+	<iostream>
+	<cstdio>
+	<set>
+	<vector>
+

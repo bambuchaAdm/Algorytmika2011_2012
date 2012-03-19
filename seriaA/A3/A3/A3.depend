@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1316714997 source:/home/adam/programowanie/algorytmika/seriaA/A3/A3/main.cpp
+	<iostream>
+	<cstdlib>
+
