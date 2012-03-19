@@ -48,6 +48,12 @@ void printOutput()
             poprz = skad[i][poprz];
         }
     }
+    while(!S.empty())
+    {
+        cout << S.top();
+        S.pop();
+    }
+    cout << endl;
 }
 
 void clean()
@@ -93,7 +99,6 @@ bool ukladajKorale(bool a, bool b)
         }
         if((!ok[i][0]) && (!ok[i][1]))
         {
-            cout << "-" << endl;
             return false;
         }
     }
@@ -122,6 +127,7 @@ int main()
             clean();
             continue;
         }
+        cout << "-" << endl;
     }
     return 0;
 }
