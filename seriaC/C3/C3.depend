@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1321808883 source:/home/adam/programowanie/algorytmika/seriaC/C3/main.cpp
+	<cstdio>
+	<iostream>
+	<vector>
+
