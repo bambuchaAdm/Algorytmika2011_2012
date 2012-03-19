@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1332086344 source:/home/arccha/programowanie/cpp/algorytmika/seriaD/D10/main.cpp
+	<iostream>
+	<cstdio>
+	<vector>
+
