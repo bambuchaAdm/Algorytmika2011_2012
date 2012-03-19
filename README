@@ -1,2 +1,35 @@
+<<<<<<< HEAD
 Programy na zajecia z algorytmiki na TCS UJ w roku szkolnym 2011 na 
 2012.
+=======
+Zadanie D5: Skarb faraona
+
+Uniknąwszy pułapek, zdolny rabuś Pteppic znalazł się w skarbcu piramidy faraona. Skarbów okazało się tam być dość, aby wynagrodzić poprzednie niebezpieczeństwa. Jest jednak jedno “ale”: jeśli Pteppic obciąży się za bardzo, może nie być w stanie przeskoczyć nad jakąś pułapką w drodze powrotnej, czego zdecydowanie by nie chciał. Woli pozostać nieco biedniejszy, za to trochę bardziej żywy...
+
+A zatem, jest do wyboru n przedmiotów, z których każdy ma swoją wagę s_i i wartość v_i. Do swojego ulubionego plecaka Pteppic może zapakować przedmioty o łącznej wadze nie przekraczającej B. Jaka jest największa wartość tego, co może zarobić?
+
+Dostępna pamięć: 128MB
+Wejście
+
+Pierwsza linia standardowego wejścia zawiera liczbę naturalną Z - liczbę zestawów danych. Opis jednego zestawu jest następujący:
+
+W pierwszej linii znajdują się dwie liczby całkowite n i B (0\leq n \leq 1000, 1 \leq B \leq 10000), oznaczające odpowiednio liczbę przedmiotów w skarbcu i pojemność plecaka. W kolejnych n liniach znajdują się opisy przedmiotów; i-ta linia składa się z dwóch liczb całkowitych s_i i v_i (1 \leq s_i \leq 10000, 1 \leq v_i \leq 10^6), oznaczających odpowiednio wagę i wartość i-tego przedmiotu.
+Wyjście
+
+Dla każdego zestawu danych wypisz (w oddzielnym wierszu) największą możliwą wartość zabranych przedmiotów.
+Przykład
+Dla danych wejściowych: 	Poprawną odpowiedzią jest:
+
+1
+4 10
+3 5
+8 16
+3 5
+4 7
+
+	
+
+17
+
+
+>>>>>>> a7c53450f4b8f57640b5dfebc76be190f3bed046
