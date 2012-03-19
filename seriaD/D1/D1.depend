@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1323102544 source:/home/adam/programowanie/cpp/D1/main.cpp
+	<iostream>
+	<cstdio>
+
