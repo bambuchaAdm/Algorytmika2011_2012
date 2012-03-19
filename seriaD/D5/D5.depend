@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1323790909 source:/home/adam/programowanie/cpp/D5/main.cpp
+	<iostream>
+	<cstdio>
+	<algorithm>
+
+1324148514 source:/home/adam/programowanie/cpp/algorytmika/seriaD/D5/main.cpp
+	<iostream>
+	<cstdio>
+	<algorithm>
+
