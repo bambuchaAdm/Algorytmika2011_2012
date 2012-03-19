@@ -48,6 +48,16 @@ void printOutput()
             poprz = skad[i][poprz];
         }
     }
+    else
+    {
+        int poprz = 1;
+        S.push(naszyjnik[lkoral][1]);
+        for(int i=lkoral;i>1;i--)
+        {
+            S.push(naszyjnik[i-1][skad[i][poprz]]);
+            poprz = skad[i][poprz];
+        }
+    }
     while(!S.empty())
     {
         cout << S.top();
