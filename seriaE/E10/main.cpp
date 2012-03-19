@@ -77,7 +77,7 @@ void test()
 
 int ukorzen()
 {
-    for(int i=1;i<vertices;i++)
+    for(int i=1;i<=vertices;i++)
     {
         if(graf[i].size() < 3)
             return i;
@@ -169,6 +169,7 @@ void readQuery()
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
     int z;
     cin >> z;
     for(int i=0;i<z;i++)
