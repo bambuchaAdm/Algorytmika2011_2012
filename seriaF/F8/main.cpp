@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <vector>
 #include <cassert>
+#include <algorithm>
 
 #define NDEBUG
 
@@ -17,40 +18,45 @@ using namespace std;
 
 struct kabel
 {
+    int ID;
     int x;
     int y;
     int z;
     char znak;
-}
+};
 
 int dlx,dly,dlz; //wymiary prostokata
 int lkabli;
 
 vector<kabel> kable;
+vector<int> parent;
 
-bool compareZ(kabel a, kable b)
+bool compareZ(kabel const & a, kabel const & b)
 {
     return a.z < b.z;
 }
 
-bool compareY(kabel a, kable b)
+bool compareY(kabel const & a, kabel const & b)
 {
     return a.y < b.y;
 }
 
-bool compareX(kabel a, kable b)
+bool compareX(kabel const & a, kabel const & b)
 {
     return a.x < b.x;
 }
 
 void readInput()
 {
-    cin >> x >> y >> z;
+    cin >> dlx >> dly >> dlz;
     cin >> lkabli;
     const int MAX = lkabli;
     kable.resize(MAX);
+    parent.resize(MAX);
     for(int i=0;i<lkabli;i++)
     {
+        parent[i] = i;
+        kable[i].ID = i;
         cin >> kable[i].x >> kable[i].y >> kable[i].z >> kable[i].znak;
     }
 }
@@ -62,12 +68,38 @@ void printOutput()
 
 void clean()
 {
-
+    parent.clear();
+    kable.clear();
 }
 
 void test()
 {
 
+}
+
+int Find(int x)
+{
+    if(parent[x]!=x)
+        parent[x] = Find(parent[x]);
+    return parent[x];
+}
+
+void Union(int x, int y)
+{
+    int xRoot = Find(x);
+    int yRoot = Find(y);
+    if(xRoot != yRoot)
+        parent[xRoot] = yRoot;
+}
+
+void przegladajZ()
+{
+    sort(kable.begin(), kable.end(), compareZ);
+}
+
+void laczKable()
+{
+    przegladajZ();
 }
 
 int main()
@@ -78,7 +110,7 @@ int main()
     for(int i=0;i<z;i++)
     {
         readInput();
-
+        laczKable();
         printOutput();
         //test();
         clean();
