@@ -16,6 +16,13 @@
 
 using namespace std;
 
+enum biegun         //why nie pyka?
+{
+    PLUS = (char) '+',
+    MINUS = (char) '-',
+    BRAK = (char) 0
+};
+
 struct kabel
 {
     int ID;
@@ -82,7 +89,9 @@ void clean()
 int Find(int x)
 {
     if(parent[x]!=x)
+    {
         parent[x] = Find(parent[x]);
+    }
     return parent[x];
 }
 
@@ -97,6 +106,29 @@ void Union(int x, int y)
 void przegladajZ()
 {
     sort(kable.begin(), kable.end(), compareZ);
+    int idxp = 0;
+    int idxk = 0;
+    for(int i=0;i<dlz;i++)
+    {
+        bool isX = false;
+        bool isY = false;
+        while(kable[idxk].z == i)
+        {
+            if(kable[idxk].x == 0)
+                isX = true;
+            if(kable[idxk].y == 0)
+                isY = true;
+            idxk++;
+        }
+        if(isY && isX)
+        {
+            for(int i=idxp; i<idxk-1;i++)
+            {
+                Union(kable[i].ID,kable[i+1].ID);
+            }
+        }
+        idxp = idxk;
+    }
 
 }
 
