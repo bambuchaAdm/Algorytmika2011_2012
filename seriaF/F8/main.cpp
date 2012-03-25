@@ -55,10 +55,15 @@ bool compareX(kabel const & a, kabel const & b)
 
 void test()
 {
-    for(int i=0; i<kable.size();i++)
+    /*for(int i=0; i<kable.size();i++)
     {
         cout << kable[i].x << " " << kable[i].y << " " << kable[i].z << " " << kable[i].znak << endl;
+    }*/
+    for(int i=0; i<parent.size();i++)
+    {
+        cout << parent[i] << " ";
     }
+    cout << endl;
 }
 
 void readInput()
@@ -105,18 +110,20 @@ void Union(int x, int y)
 
 void przegladajZ()
 {
-    sort(kable.begin(), kable.end(), compareZ);
+    vector<kabel> kable1 = kable;
+    kable1.resize(lkabli);
+    sort(kable1.begin(), kable1.end(), compareZ);
     int idxp = 0;
     int idxk = 0;
     for(int i=0;i<dlz;i++)
     {
         bool isX = false;
         bool isY = false;
-        while(kable[idxk].z == i)
+        while(kable1[idxk].z == i)
         {
-            if(kable[idxk].x == 0)
+            if(kable1[idxk].x == 0)
                 isX = true;
-            if(kable[idxk].y == 0)
+            if(kable1[idxk].y == 0)
                 isY = true;
             idxk++;
         }
@@ -124,7 +131,7 @@ void przegladajZ()
         {
             for(int i=idxp; i<idxk-1;i++)
             {
-                Union(kable[i].ID,kable[i+1].ID);
+                Union(kable1[i].ID,kable1[i+1].ID);
             }
         }
         idxp = idxk;
@@ -132,9 +139,83 @@ void przegladajZ()
 
 }
 
+void przegladajY()
+{
+    vector<kabel> kable1 = kable;
+    kable1.resize(lkabli);
+    sort(kable1.begin(), kable1.end(), compareY);
+    int idxp = 0;
+    int idxk = 0;
+    for(int i=0;i<dly;i++)
+    {
+        bool isX = false;
+        bool isZ = false;
+        while(kable1[idxk].y == i)
+        {
+            if(kable1[idxk].z == 0)
+                isZ = true;
+            if(kable1[idxk].x == 0)
+                isX = true;
+            idxk++;
+        }
+        if(isZ && isX)
+        {
+            for(int i=idxp; i<idxk-1;i++)
+            {
+                Union(kable1[i].ID,kable1[i+1].ID);
+            }
+        }
+        idxp = idxk;
+    }
+
+}
+
+void przegladajX()
+{
+    vector<kabel> kable1 = kable;
+    kable1.resize(lkabli);
+    sort(kable1.begin(), kable1.end(), compareX);
+    int idxp = 0;
+    int idxk = 0;
+    for(int i=0;i<dlx;i++)
+    {
+        bool isZ = false;
+        bool isY = false;
+        while(kable1[idxk].x == i)
+        {
+            if(kable1[idxk].z == 0)
+                isZ = true;
+            if(kable1[idxk].y == 0)
+                isY = true;
+            idxk++;
+        }
+        if(isY && isZ)
+        {
+            for(int i=idxp; i<idxk-1;i++)
+            {
+                Union(kable1[i].ID,kable1[i+1].ID);
+            }
+        }
+        idxp = idxk;
+    }
+
+}
+
+bool szukajOdpowiedzi()
+{
+    for(int i=0;i<parent.size();i++)
+    {
+
+    }
+    return false;
+}
+
 void laczKable()
 {
     przegladajZ();
+    przegladajX();
+    przegladajY();
+    szukajOdpowiedzi();
 }
 
 int main()
@@ -147,6 +228,7 @@ int main()
         readInput();
         laczKable();
         printOutput();
+        assert(true);
         test();
         clean();
     }
