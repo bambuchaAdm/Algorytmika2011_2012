@@ -100,14 +100,16 @@ void visitVertex(int n)
     {
         if(graf[n].size()==2)
         {
+            bool war = false;
             int i=0;
             if(graf[n][i]!=parent[n] && kolor[graf[n][i]]==BIALY)
             {
                 lewy[n]=graf[n][i];
                 visitVertex(graf[n][i]);
+                i++;
                 czas++;
                 in[n]=czas;
-                i++;
+
             }
             else
             {
@@ -115,10 +117,18 @@ void visitVertex(int n)
             }
             if(graf[n][i]!=parent[n] && kolor[graf[n][i]]==BIALY)
             {
-                lewy[n]=graf[n][i];
-                visitVertex(graf[n][i]);
-                czas++;
-                in[n]=czas;
+                if(graf[n][i-1]!=parent[n])
+                {
+                    prawy[n]=graf[n][i];
+                    visitVertex(graf[n][i]);
+                }
+                else
+                {
+                    lewy[n]=graf[n][i];
+                    visitVertex(graf[n][i]);
+                    czas++;
+                    in[n]=czas;
+                }
             }
         }
         else if(graf[n].size()==3)
@@ -206,7 +216,7 @@ void readQuery()
     {
         int z, cel;
         cin >> z >> cel;
-        //generujDroge(z,cel);
+        generujDroge(z,cel);
         cout << endl;
     }
     //cerr << "READ QUERY DONE" << endl;
@@ -223,7 +233,7 @@ int main()
         int korzen = ukorzen();
         parent[korzen] = BRAK;
         DFS(korzen);
-        //test();
+        test();
         //readQuery();
         clean();
     }
