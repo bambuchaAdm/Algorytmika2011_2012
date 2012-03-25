@@ -15,7 +15,6 @@ const bool TESTUJ = false;
 
 enum kolorek
 {
-    BRAK = -1,
     BIALY = 1,
     SZARY = 2,
     CZARNY = 3
@@ -23,6 +22,8 @@ enum kolorek
 
 int vertices, edges;
 int czas = 0;
+
+const int BRAK = -1;
 
 vector<vector<int> > graf;
 vector<kolorek> kolor;
