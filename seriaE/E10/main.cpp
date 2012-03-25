@@ -98,47 +98,37 @@ void visitVertex(int n)
     }
     else
     {
-        int i=0;
-        if(graf[n][i]!=parent[n] && kolor[graf[n][i]]==BIALY)
+        if(graf[n].size()==2)
         {
-            lewy[n]=graf[n][i];
-            visitVertex(graf[n][i]);
-            i++;
-            war = true;
-        }
-        else
-        {
-            i++;
-        }
-        if(graf[n][i]!=parent[n] && kolor[graf[n][i]]==BIALY)
-        {
-            if(!war)
-                lewy[n]=graf[n][i];
-            else
+            int i=0;
+            if(parent[graf[n][i]]!=n && kolor[graf[n][i]]==BIALY)
             {
+                lewe[n]=graf[n][i];
+                vistiVertex(graf[n][i]);
                 czas++;
                 in[n]=czas;
-                prawy[n]=graf[n][i];
+                i++;
             }
-            visitVertex(graf[n][i]);
-            i++;
-            war = true;
-        }
-        else
-        {
-            i++;
-        }
-        if(graf[n][i]!=parent[n] && kolor[graf[n][i]]==BIALY && graf[n].size()>2)
-        {
-            if(!war)
-                lewy[n]=graf[n][i];
             else
             {
+                i++;
+            }
+            if(parent[graf[n][i]]!=n && kolor[graf[n][i]]==BIALY)
+            {
+                lewe[n]=graf[n][i];
+                vistiVertex(graf[n][i]);
                 czas++;
                 in[n]=czas;
-                prawy[n]=graf[n][i];
             }
-            visitVertex(graf[n][i]);
+        }
+        else if(graf[n].size()==3)
+        {
+            if(parent[graf[n][i]]!=n && kolor[graf[n][i]]==BIALY)
+            {
+                vistiVertex(graf[n][i]);
+                czas++;
+                in[n]=czas;
+            }
         }
     }
     kolor[n]=CZARNY;
