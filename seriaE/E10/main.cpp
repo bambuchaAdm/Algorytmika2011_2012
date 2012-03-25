@@ -11,16 +11,21 @@
 
 using namespace std;
 
-const int BIALY = 1;
-const int SZARY = 2;
-const int CZARNY = 3;
-const int BRAK = -1;
+const bool TESTUJ = false;
+
+enum kolorek
+{
+    BRAK = -1,
+    BIALY = 1,
+    SZARY = 2,
+    CZARNY = 3
+};
 
 int vertices, edges;
 int czas = 0;
 
 vector<vector<int> > graf;
-vector<int> kolor;
+vector<kolorek> kolor;
 vector<int> pre;    //order
 vector<int> in;
 vector<int> post;
@@ -48,7 +53,21 @@ void readInput()
         graf[a].push_back(b);
         graf[b].push_back(a);
     }
-    //cerr << "READ INPUT DONE" << endl;
+    if(TESTUJ)
+        cerr << "READ INPUT DONE" << endl;
+}
+
+void graftest()
+{
+    for(int i=0;i<graf.size();i++)
+    {
+        cout << i <<  ": ";
+        for(int j=0;j<graf[i].size();j++)
+        {
+            cout << graf[i][j] << " ";
+        }
+        cout << endl;
+    }
 }
 
 void clean()
@@ -61,14 +80,15 @@ void clean()
     lewy.clear();
     prawy.clear();
     parent.clear();
-    //cerr << "CLEAN DONE" << endl;
+    if(TESTUJ)
+        cerr << "CLEAN DONE" << endl;
 }
 
 void test()
 {
-    //for(int i=1;i<=vertices;i++)
-    //    cout << parent[i] << " ";
-    //cout << endl;
+    for(int i=1;i<=vertices;i++)
+        cout << parent[i] << " ";
+    cout << endl;
     for(int i=1;i<=vertices;i++)
     {
         cout << pre[i] << " " << in[i] << " " << post[i] << endl;
@@ -82,7 +102,8 @@ int ukorzen()
         if(graf[i].size() < 3)
             return i;
     }
-    //cerr << "UKORZEN DONE" << endl;
+    if(TESTUJ)
+        cerr << "UKORZEN DONE" << endl;
 }
 
 void visitVertex(int n)
@@ -93,6 +114,8 @@ void visitVertex(int n)
     bool war = false;
     if(graf[n].size()==1)
     {
+        if(parent[n]==-1)
+            visitVertex(graf[n][0]);
         czas++;
         in[n] = czas;
     }
@@ -105,6 +128,7 @@ void visitVertex(int n)
             if(graf[n][i]!=parent[n] && kolor[graf[n][i]]==BIALY)
             {
                 lewy[n]=graf[n][i];
+                parent[graf[n][i]]=n;
                 visitVertex(graf[n][i]);
                 i++;
                 czas++;
@@ -119,11 +143,13 @@ void visitVertex(int n)
             {
                 if(graf[n][i-1]!=parent[n])
                 {
+                    parent[graf[n][i]]=n;
                     prawy[n]=graf[n][i];
                     visitVertex(graf[n][i]);
                 }
                 else
                 {
+                    parent[graf[n][i]]=n;
                     lewy[n]=graf[n][i];
                     visitVertex(graf[n][i]);
                     czas++;
@@ -137,6 +163,7 @@ void visitVertex(int n)
             bool war = false;
             if(graf[n][i]!=parent[n] && kolor[graf[n][i]]==BIALY)
             {
+                parent[graf[n][i]]=n;
                 visitVertex(graf[n][i]);
                 lewy[n]=graf[n][i];
                 i++;
@@ -148,6 +175,7 @@ void visitVertex(int n)
             {
                 if(war)
                 {
+                    parent[graf[n][i]]=n;
                     prawy[n]=graf[n][i];
                     czas++;
                     in[n]=czas;
@@ -156,6 +184,7 @@ void visitVertex(int n)
                 }
                 else
                 {
+                    parent[graf[n][i]]=n;
                     lewy[n]=graf[n][i];
                     war = true;
                     visitVertex(graf[n][i]);
@@ -166,6 +195,7 @@ void visitVertex(int n)
                 i++;
             if(graf[n][i]!=parent[n] && kolor[graf[n][i]]==BIALY)
             {
+                parent[graf[n][i]]=n;
                 prawy[n]=graf[n][i];
                 czas++;
                 in[n]=czas;
@@ -182,7 +212,8 @@ void DFS(int n)
 {
     czas = 0;
     visitVertex(n);
-    //cerr << "DFS DONE" << endl;
+    if(TESTUJ)
+        cerr << "DFS DONE" << endl;
 }
 
 void generujDroge(int z, int cel)
@@ -205,7 +236,8 @@ void generujDroge(int z, int cel)
     {
         generujDroge(parent[z],cel);
     }
-    //cerr << "GENERUJ DROGE DONE" << endl;
+    //if(TESTUJ)
+      //  cerr << "GENERUJ DROGE DONE" << endl;
 }
 
 void readQuery()
@@ -219,7 +251,8 @@ void readQuery()
         generujDroge(z,cel);
         cout << endl;
     }
-    //cerr << "READ QUERY DONE" << endl;
+    if(TESTUJ)
+        cerr << "READ QUERY DONE" << endl;
 }
 
 int main()
@@ -233,8 +266,9 @@ int main()
         int korzen = ukorzen();
         parent[korzen] = BRAK;
         DFS(korzen);
-        test();
-        //readQuery();
+        graftest();
+        //test();
+        readQuery();
         clean();
     }
 }
