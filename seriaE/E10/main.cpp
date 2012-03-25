@@ -115,7 +115,11 @@ void visitVertex(int n)
     if(graf[n].size()==1)
     {
         if(parent[n]==-1)
+        {
+            lewy[n] = graf[n][0];
             visitVertex(graf[n][0]);
+            parent[graf[n][0]] = n;
+        }
         czas++;
         in[n] = czas;
     }
@@ -266,7 +270,7 @@ int main()
         int korzen = ukorzen();
         parent[korzen] = BRAK;
         DFS(korzen);
-        graftest();
+        //graftest();
         //test();
         readQuery();
         clean();
