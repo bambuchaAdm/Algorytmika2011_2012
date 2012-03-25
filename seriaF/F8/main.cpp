@@ -46,10 +46,17 @@ bool compareX(kabel const & a, kabel const & b)
     return a.x < b.x;
 }
 
+void test()
+{
+    for(int i=0; i<kable.size();i++)
+    {
+        cout << kable[i].x << " " << kable[i].y << " " << kable[i].z << " " << kable[i].znak << endl;
+    }
+}
+
 void readInput()
 {
-    cin >> dlx >> dly >> dlz;
-    cin >> lkabli;
+    cin >> dlx >> dly >> dlz >> lkabli;
     const int MAX = lkabli;
     kable.resize(MAX);
     parent.resize(MAX);
@@ -72,11 +79,6 @@ void clean()
     kable.clear();
 }
 
-void test()
-{
-
-}
-
 int Find(int x)
 {
     if(parent[x]!=x)
@@ -95,6 +97,7 @@ void Union(int x, int y)
 void przegladajZ()
 {
     sort(kable.begin(), kable.end(), compareZ);
+
 }
 
 void laczKable()
@@ -106,13 +109,13 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     int z;
-    scanf("%d",&z);
+    cin >> z;
     for(int i=0;i<z;i++)
     {
         readInput();
         laczKable();
         printOutput();
-        //test();
+        test();
         clean();
     }
 }
