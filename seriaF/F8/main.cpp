@@ -12,7 +12,7 @@
 #include <cassert>
 #include <algorithm>
 
-#define NDEBUG
+//#define NDEBUG
 
 using namespace std;
 
@@ -225,7 +225,10 @@ void laczKable()
     przegladajZ();
     przegladajX();
     przegladajY();
-    szukajOdpowiedzi();
+    if(szukajOdpowiedzi())
+        cout << "TAK" << endl;
+    else
+        cout << "NIE" << endl;
 }
 
 int main()
@@ -238,8 +241,8 @@ int main()
         readInput();
         laczKable();
         printOutput();
-        assert(true);
-        test();
+        //assert(true);
+        //test();
         clean();
     }
 }
