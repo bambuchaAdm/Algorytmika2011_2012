@@ -14,6 +14,7 @@
 using namespace std;
 
 int lkoral;
+bool isPossible = false;
 
 vector<vector<char> > naszyjnik;
 vector<vector<bool> > ok;
@@ -25,38 +26,32 @@ void readInput()
     const int MAX = lkoral+1;
     naszyjnik.resize(MAX,vector<char>(2));
     skad.resize(MAX,vector<int>(2));
-    ok.resize(MAX,vector<bool>(2,false)); //ciekawe czy to dziala
-    for(int i=1;i<=lkoral;i++)
+    ok.resize(MAX,vector<bool>(2,false));
+    for(int i=0;i<lkoral;i++)
     {
         //scanf("%c %c",&naszyjnik[i][0],&naszyjnik[i][1]);     //czemu to nie dziala? Zapytac kogos.
         cin >> naszyjnik[i][0] >> naszyjnik[i][1];
     }
-    naszyjnik[0][0] = naszyjnik[lkoral][0];
-    naszyjnik[0][1] = naszyjnik[lkoral][1];
+    naszyjnik[lkoral][0] = naszyjnik[0][0];
+    naszyjnik[lkoral][1] = naszyjnik[0][1];
 }
 
-void printOutput()
+void printOutput(int strona)
 {
+    if(isPossible)
+        return;
+    isPossible = true;
     stack<char> S;
-    if(ok[lkoral][0])
+    strona = skad[lkoral][strona];
+    //cout << lkoral - 1 << strona << endl;
+    //cout << naszyjnik[lkoral-1][strona] << endl << endl;
+    S.push(naszyjnik[lkoral-1][strona]);
+    for(int i=lkoral-1; i>0; i--)
     {
-        int poprz = 0;
-        S.push(naszyjnik[lkoral][0]);
-        for(int i=lkoral;i>1;i--)
-        {
-            S.push(naszyjnik[i-1][skad[i][poprz]]);
-            poprz = skad[i][poprz];
-        }
-    }
-    else
-    {
-        int poprz = 1;
-        S.push(naszyjnik[lkoral][1]);
-        for(int i=lkoral;i>1;i--)
-        {
-            S.push(naszyjnik[i-1][skad[i][poprz]]);
-            poprz = skad[i][poprz];
-        }
+        strona = skad[i][strona];
+       // cout << naszyjnik[i-1][strona] << endl;
+        S.push(naszyjnik[i-1][strona]);
+       // cout << strona << endl;
     }
     while(!S.empty())
     {
@@ -68,8 +63,10 @@ void printOutput()
 
 void clean()
 {
+    isPossible = false;
     naszyjnik.clear();
     ok.clear();
+    skad.clear();
 }
 
 void test()
@@ -88,31 +85,37 @@ void test1()
         cout << naszyjnik[i][0] << " " << naszyjnik[i][1] << endl;
 }
 
-bool ukladajKorale(bool a, bool b)
+void ukladajKorale()
 {
-    ok[0][0] = a;
-    ok[0][1] = b;
-    for(int i=1;i<=lkoral;i++)
+    for(int i=1;i<lkoral;i++)
     {
-        for(int j=0;j<2;j++)
+        if(ok[i][0])
         {
-            if(ok[i-1][0] && naszyjnik[i][j] != naszyjnik[i-1][0])
+            if(naszyjnik[i][0]!=naszyjnik[i+1][0])
             {
-                ok[i][j] = true;
-                skad[i][j] = 0;
+                ok[i+1][0] = true;
+                skad[i+1][0] = 0;
             }
-            else if(ok[i-1][1] && naszyjnik[i][j] != naszyjnik[i-1][1])
+            if(naszyjnik[i][0]!=naszyjnik[i+1][1])
             {
-                ok[i][j] = true;
-                skad[i][j] = 1;
+                ok[i+1][1] = true;
+                skad[i+1][1] = 0;
             }
         }
-        if((!ok[i][0]) && (!ok[i][1]))
+        if(ok[i][1])
         {
-            return false;
+            if(naszyjnik[i][1]!=naszyjnik[i+1][0])
+            {
+                ok[i+1][0] = true;
+                skad[i+1][0] = 1;
+            }
+            if(naszyjnik[i][1]!=naszyjnik[i+1][1])
+            {
+                ok[i+1][1] = true;
+                skad[i+1][1] = 1;
+            }
         }
     }
-    return true;
 }
 
 int main()
@@ -122,22 +125,51 @@ int main()
     for(int i=0;i<z;i++)
     {
         readInput();
-        //test1();
-        if(ukladajKorale(true,false))
+        isPossible=false;
+        bool czyToMaSens = false;
+        if(naszyjnik[0][0]!=naszyjnik[1][0])
         {
-            //test();
-            printOutput();
-            clean();
-            continue;
+            ok[1][0] = true;
+            skad[1][0] = 0;
+            czyToMaSens = true;
         }
-        else if(ukladajKorale(false,true))
+        if(naszyjnik[0][0]!=naszyjnik[1][1])
         {
-            //test();
-            printOutput();
-            clean();
-            continue;
+            ok[1][1] = true;
+            skad[1][1] = 0;
+            czyToMaSens = true;
         }
-        cout << "-" << endl;
+        if(czyToMaSens)
+        {
+            ukladajKorale();
+            if(ok[lkoral][0] && ok[0][0])
+                printOutput(0);
+        }
+        isPossible = false;
+        ok.clear();
+        skad.clear();
+        const int MAX = lkoral +1;
+        skad.resize(MAX,vector<int>(2));
+        ok.resize(MAX,vector<bool>(2,false));
+        if(isPossible)
+        {
+            if(naszyjnik[0][1]!=naszyjnik[1][0])
+            {
+                ok[1][0]=true;
+                skad[1][0] = 1;
+            }
+            if(naszyjnik[0][1]!=naszyjnik[1][1])
+            {
+                ok[1][1] = true;
+                skad[1][1] = 1;
+            }
+            ukladajKorale();
+            if(ok[lkoral][1] && ok[0][1])
+                printOutput(1);
+        }
+        if(!isPossible)
+            cout << "-" << endl;
+
     }
     return 0;
 }

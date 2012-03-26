@@ -16,12 +16,12 @@
 
 using namespace std;
 
-enum biegun         //why nie pyka?
+/*enum biegun         //why nie pyka?
 {
     PLUS = (char) '+',
     MINUS = (char) '-',
     BRAK = (char) 0
-};
+};*/
 
 struct kabel
 {
@@ -78,11 +78,6 @@ void readInput()
         kable[i].ID = i;
         cin >> kable[i].x >> kable[i].y >> kable[i].z >> kable[i].znak;
     }
-}
-
-void printOutput()
-{
-
 }
 
 void clean()
@@ -240,7 +235,6 @@ int main()
     {
         readInput();
         laczKable();
-        printOutput();
         //assert(true);
         //test();
         clean();
