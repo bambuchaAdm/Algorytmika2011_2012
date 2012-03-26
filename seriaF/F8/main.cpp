@@ -115,7 +115,7 @@ void przegladajZ()
     sort(kable1.begin(), kable1.end(), compareZ);
     int idxp = 0;
     int idxk = 0;
-    for(int i=0;i<dlz;i++)
+    for(int i=0;i<=dlz;i++)
     {
         bool isX = false;
         bool isY = false;
@@ -146,7 +146,7 @@ void przegladajY()
     sort(kable1.begin(), kable1.end(), compareY);
     int idxp = 0;
     int idxk = 0;
-    for(int i=0;i<dly;i++)
+    for(int i=0;i<=dly;i++)
     {
         bool isX = false;
         bool isZ = false;
@@ -177,7 +177,7 @@ void przegladajX()
     sort(kable1.begin(), kable1.end(), compareX);
     int idxp = 0;
     int idxk = 0;
-    for(int i=0;i<dlx;i++)
+    for(int i=0;i<=dlx;i++)
     {
         bool isZ = false;
         bool isY = false;
