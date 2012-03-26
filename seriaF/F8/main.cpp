@@ -16,42 +16,76 @@
 
 using namespace std;
 
-enum biegun         //why nie pyka?
+enum Biegun         //why nie pyka?
 {
     PLUS = (char) '+',
     MINUS = (char) '-',
     BRAK = (char) 0
 };
 
-struct kabel
+enum Direction
+{
+    X,
+    Y,
+    Z
+};
+
+struct Kabel
 {
     int ID;
     int x;
     int y;
     int z;
     char znak;
+
+    int getDirection(Direction direction)
+    {
+	switch(direction)
+	{
+	case X:
+	    return x;
+	case Y:
+	    return y;
+	case Z:
+	    return z;
+	}
+    }
 };
 
+bool compareZ(// const Kabel & a,const Kabel & b)
+// {
+//     return a.z < b.z;
+// }
+
+// bool compareY(const Kabel & a,const Kabel & b) 
+// {
+//     return a.y < b.y;
+// }
+
+// bool compareX(const Kabel & a,const Kabel & b) 
+// {
+//     return a.x < b.x;
+// }
+typedef bool (* Comparer)(const Kabel & a, const Kabel & b);
 int dlx,dly,dlz; //wymiary prostokata
 int lkabli;
 
-vector<kabel> kable;
+vector<Kabel> kable;
 vector<int> parent;
 
-bool compareZ(kabel const & a, kabel const & b)
+Comparer dim(Direction direction)
 {
-    return a.z < b.z;
+    switch(direction)
+    {
+    case X:
+	return &compareX;
+    case Y:
+	return &compareY;
+    case Z:
+	return &compareZ;
+    }
 }
 
-bool compareY(kabel const & a, kabel const & b)
-{
-    return a.y < b.y;
-}
-
-bool compareX(kabel const & a, kabel const & b)
-{
-    return a.x < b.x;
-}
 
 void test()
 {
@@ -110,7 +144,7 @@ void Union(int x, int y)
 
 void przegladajZ()
 {
-    vector<kabel> kable1 = kable;
+    vector<Kabel> kable1 = kable;
     kable1.resize(lkabli);
     sort(kable1.begin(), kable1.end(), compareZ);
     int idxp = 0;
@@ -141,7 +175,7 @@ void przegladajZ()
 
 void przegladajY()
 {
-    vector<kabel> kable1 = kable;
+    vector<Kabel> kable1 = kable;
     kable1.resize(lkabli);
     sort(kable1.begin(), kable1.end(), compareY);
     int idxp = 0;
@@ -172,7 +206,7 @@ void przegladajY()
 
 void przegladajX()
 {
-    vector<kabel> kable1 = kable;
+    vector<Kabel> kable1 = kable;
     kable1.resize(lkabli);
     sort(kable1.begin(), kable1.end(), compareX);
     int idxp = 0;
