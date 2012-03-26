@@ -52,26 +52,22 @@ struct Kabel
     }
 };
 
-bool compareZ(// const Kabel & a,const Kabel & b)
-// {
-//     return a.z < b.z;
-// }
+bool compareZ( const Kabel & a,const Kabel & b)
+{
+    return a.z < b.z;
+}
 
-// bool compareY(const Kabel & a,const Kabel & b) 
-// {
-//     return a.y < b.y;
-// }
+bool compareY(const Kabel & a,const Kabel & b) 
+{
+    return a.y < b.y;
+}
 
-// bool compareX(const Kabel & a,const Kabel & b) 
-// {
-//     return a.x < b.x;
-// }
+bool compareX(const Kabel & a,const Kabel & b) 
+{
+    return a.x < b.x;
+}
+
 typedef bool (* Comparer)(const Kabel & a, const Kabel & b);
-int dlx,dly,dlz; //wymiary prostokata
-int lkabli;
-
-vector<Kabel> kable;
-vector<int> parent;
 
 Comparer dim(Direction direction)
 {
@@ -87,12 +83,16 @@ Comparer dim(Direction direction)
 }
 
 
+int dlx,dly,dlz; //wymiary prostokata
+int lkabli;
+
+vector<Kabel> kable;
+vector<int> parent;
+
+
+
 void test()
 {
-    /*for(int i=0; i<kable.size();i++)
-    {
-        cout << kable[i].x << " " << kable[i].y << " " << kable[i].z << " " << kable[i].znak << endl;
-    }*/
     for(int i=0; i<parent.size();i++)
     {
         cout << parent[i] << " ";
