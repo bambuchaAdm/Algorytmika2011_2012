@@ -203,9 +203,19 @@ void przegladajX()
 
 bool szukajOdpowiedzi()
 {
+    vector<char> znakss;
+    const char NIC = '#';
+    znakss.resize(lkabli,NIC);
     for(int i=0;i<parent.size();i++)
     {
-
+        if(znakss[parent[i]] == NIC)
+            znakss[parent[i]] = kable[i].znak;
+        if(znakss[parent[i]] == '0')
+            znakss[parent[i]] = kable[i].znak;
+        if((znakss[parent[i]] == '+') && (kable[i].znak == '-'))
+            return true;
+        if(znakss[parent[i]] == '-' && kable[i].znak == '+')
+            return true;
     }
     return false;
 }
