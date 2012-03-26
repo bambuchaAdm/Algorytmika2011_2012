@@ -142,26 +142,26 @@ void Union(int x, int y)
         parent[xRoot] = yRoot;
 }
 
-void przegladajZ()
+void przegladaj(Direction a,Direction b,Direction c)
 {
     vector<Kabel> kable1 = kable;
-    kable1.resize(lkabli);
-    sort(kable1.begin(), kable1.end(), compareZ);
+    //kable1.resize(lkabli); Nie jest potrzebne z racji wcze¶niejszej operacji
+    sort(kable1.begin(), kable1.end(), dim(a));
     int idxp = 0;
     int idxk = 0;
     for(int i=0;i<=dlz;i++)
     {
-        bool isX = false;
-        bool isY = false;
-        while(kable1[idxk].z == i)
+        bool isB = false;
+        bool isC = false;
+        while(kable1[idxk].getDirection(a) == i)
         {
-            if(kable1[idxk].x == 0)
-                isX = true;
-            if(kable1[idxk].y == 0)
-                isY = true;
+            if(kable1[idxk].getDirection(b) == 0)
+                isB = true;
+            if(kable1[idxk].getDirection(c) == 0)
+                isC = true;
             idxk++;
         }
-        if(isY && isX)
+        if(isB && isC)
         {
             for(int i=idxp; i<idxk-1;i++)
             {
@@ -173,68 +173,9 @@ void przegladajZ()
 
 }
 
-void przegladajY()
-{
-    vector<Kabel> kable1 = kable;
-    kable1.resize(lkabli);
-    sort(kable1.begin(), kable1.end(), compareY);
-    int idxp = 0;
-    int idxk = 0;
-    for(int i=0;i<=dly;i++)
-    {
-        bool isX = false;
-        bool isZ = false;
-        while(kable1[idxk].y == i)
-        {
-            if(kable1[idxk].z == 0)
-                isZ = true;
-            if(kable1[idxk].x == 0)
-                isX = true;
-            idxk++;
-        }
-        if(isZ && isX)
-        {
-            for(int i=idxp; i<idxk-1;i++)
-            {
-                Union(kable1[i].ID,kable1[i+1].ID);
-            }
-        }
-        idxp = idxk;
-    }
-
-}
-
-void przegladajX()
-{
-    vector<Kabel> kable1 = kable;
-    kable1.resize(lkabli);
-    sort(kable1.begin(), kable1.end(), compareX);
-    int idxp = 0;
-    int idxk = 0;
-    for(int i=0;i<=dlx;i++)
-    {
-        bool isZ = false;
-        bool isY = false;
-        while(kable1[idxk].x == i)
-        {
-            if(kable1[idxk].z == 0)
-                isZ = true;
-            if(kable1[idxk].y == 0)
-                isY = true;
-            idxk++;
-        }
-        if(isY && isZ)
-        {
-            for(int i=idxp; i<idxk-1;i++)
-            {
-                Union(kable1[i].ID,kable1[i+1].ID);
-            }
-        }
-        idxp = idxk;
-    }
-
-}
-
+// Z, X, Y
+// Y, Z, X
+// X, Z ,Y
 bool szukajOdpowiedzi()
 {
     for(int i=0;i<parent.size();i++)
@@ -246,9 +187,9 @@ bool szukajOdpowiedzi()
 
 void laczKable()
 {
-    przegladajZ();
-    przegladajX();
-    przegladajY();
+    przegladaj(Z,X,Y);
+    przegladaj(Y,Z,X);
+    przegladaj(X,Z,Y);
     szukajOdpowiedzi();
 }
 
