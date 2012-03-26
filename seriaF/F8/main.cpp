@@ -90,7 +90,7 @@ vector<Kabel> kable;
 vector<int> parent;
 
 
-
+#ifndef NDEBUG
 void test()
 {
     for(int i=0; i<parent.size();i++)
@@ -99,6 +99,7 @@ void test()
     }
     cout << endl;
 }
+#endif
 
 void readInput()
 {
@@ -204,7 +205,9 @@ int main()
         laczKable();
         printOutput();
         assert(true);
+#ifndef NDEBUG
         test();
+#endif
         clean();
     }
 }
