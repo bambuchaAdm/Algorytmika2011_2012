@@ -2,7 +2,7 @@
 *   Author: Adam Piekarczyk
 *   Project Title:
 *   School Year: 2011/2012
-*   School: VLO Krak�w
+*   School: VLO Kraków
 *   Class: 1e
 **/
 
@@ -17,8 +17,8 @@ using namespace std;
 
 enum strona
 {
-    IMP = 1,
-    REB = 2
+    IMP,
+    REB
 };
 
 int dlx, dly, dlz;
@@ -26,7 +26,7 @@ int lmiesiecy;
 int lSkladowychImp;
 int lmiesNieSpoj;
 
-vector< vector< vector<strona > > > galaktyka;
+vector<strona> galaktyka;
 vector< vector<int> > wojna;
 vector<int> parent;
 
@@ -39,11 +39,7 @@ void readInput()
     {
         parent[i] = i;
     }
-    galaktyka.resize(dlx);    //ciekawe czy to sie da rozszerzyc odpowiednio uzywajac jednej templatki?
-    for(int i=0;i<dlx;i++)
-    {
-        galaktyka[i].resize(dly,vector<strona>(dlz,REB));
-    }
+    galaktyka.resize(MAXSEKTOROW,REB);
     wojna.resize(lmiesiecy);
     for(int i=0;i<lmiesiecy;i++)
     {
@@ -77,6 +73,32 @@ void unionImp(int x, int y)
     }
 }
 
+/*
+*   Ogólnie rzecz biorąc, mamy 6 sąsiadów. Koordynaty, zakładając że x to obecna planeta:
+*   -po lewej - x + dlx
+*
+*/
+void sprawdzSasiadow(int n)
+{
+    if(galaktyka[n+dlx]==IMP)
+    {
+        unionImp(n,n+dlx);
+    }
+}
+
+void symuluj()
+{
+    for(vector<int>::iterator it=wojna.rbegin();it!=wojna.rend();it++)
+    {
+        for(int i=0;i<*it.size();i++)
+        {
+            galaktyka[*it[i]] = IMP;
+            lSkladowychImp++;
+
+        }
+    }
+}
+
 void clean()
 {
     wojna.clear();
@@ -99,7 +121,7 @@ int main()
     for(int i=0;i<z;i++)
     {
         readInput();
-
+        symuluj();
         printOutput();
         #ifndef NDEBUG
         test();
