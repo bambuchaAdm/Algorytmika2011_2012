@@ -1,6 +1,6 @@
 /**
 *   Author: Adam Piekarczyk
-*   Project Title:
+*   Project Title: F7 - Imperium
 *   School Year: 2011/2012
 *   School: VLO Kraków
 *   Class: 1e
@@ -11,7 +11,7 @@
 #include <vector>
 #include <cassert>
 
-#define NDEBUG
+//#define NDEBUG
 
 using namespace std;
 
@@ -64,8 +64,8 @@ int findRoot(int n)
 
 void unionImp(int x, int y)
 {
-    xRoot = findRoot(x);
-    yRoot = findRoot(y);
+    int xRoot = findRoot(x);
+    int yRoot = findRoot(y);
     if(xRoot != yRoot)
     {
         lSkladowychImp--;
@@ -120,14 +120,27 @@ void sprawdzSasiadow(int n)
 
 void symuluj()
 {
-    for(vector<int>::iterator it=wojna.rbegin();it!=wojna.rend();it++)
+    /*for(vector< vector<strona> >::reverse_iterator it=wojna.rbegin();it!=wojna.rend();it++) //dostaje jakieś dzikie błędy z STL-a i jest za późno na to, żebym kminił o co chodzi.
     {
-        for(int i=0;i<*it.size();i++)
+        for(int i=0;i<(*it).size();i++)
         {
-            galaktyka[*it[i]] = IMP;
+            galaktyka[((*it)[i])] = IMP;
             lSkladowychImp++;
-
+            sprawdzSasiadow(((*it)[i]));
         }
+        if(lSkladowychImp!=0)
+            lmiesNieSpoj++;
+    }*/
+    for(int j=wojna.size()-1;j>=0;j--)
+    {
+        for(int i=0;i<wojna[j].size();i++)
+        {
+            galaktyka[wojna[j][i]] = IMP;
+            lSkladowychImp++;
+            sprawdzSasiadow(wojna[j][i]);
+        }
+        if(lSkladowychImp!=0)
+            lmiesNieSpoj++;
     }
 }
 
@@ -135,7 +148,7 @@ void clean()
 {
     wojna.clear();
     galaktyka.clear();
-    paren.clear();
+    parent.clear();
     lSkladowychImp = 0;
 }
 
@@ -154,7 +167,7 @@ int main()
     {
         readInput();
         symuluj();
-        printOutput();
+        cout << lmiesNieSpoj << endl;
         #ifndef NDEBUG
         test();
         #endif
