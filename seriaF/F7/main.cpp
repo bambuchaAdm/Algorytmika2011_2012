@@ -58,12 +58,21 @@ void readInput()
 
 int findRoot(int n)
 {
-    if()
+    if(parent[n]!=n)
+    {
+        parent[n] = findRoot(parent[n]);
+    }
+    return parent[n];
 }
 
-void printOutput()
+void printOutput(int x, int y)
 {
+    xRoot = findRoot(x);
+    yRoot = findRoot(y);
+    if(xRoot != yRoot)
+    {
 
+    }
 }
 
 void clean()
