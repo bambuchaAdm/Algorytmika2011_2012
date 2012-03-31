@@ -76,14 +76,36 @@ void unionImp(int x, int y)
 /*
 *   Ogólnie rzecz biorąc, mamy 6 sąsiadów. Koordynaty, zakładając że x to obecna planeta:
 *   -po lewej - x + dlx
-*
+*   -po prawej - x - dlx
+*   -w przód - x + 1
+*   -w tyl - x - 1
+*   -do góry - x + dlx*dly
+*   -w dół - x - dlx*dly
 */
 void sprawdzSasiadow(int n)
 {
-    if(galaktyka[n+dlx]==IMP)
-    {
-        unionImp(n,n+dlx);
-    }
+    if(n+dlx <= n+(dlx*(dly-1)))
+        if(galaktyka[n+dlx]==IMP)
+        {
+            unionImp(n,n+dlx);
+        }
+    if(n-dlx >= n)
+        if(galaktyka[n-dlx]==IMP)
+        {
+            unionImp(n,n-dlx);
+        }
+    if(n+1 <= dlx-1)
+        if(galaktyka[n+1]==IMP)
+        {
+            unionImp(n,n+1);
+        }
+    if(n-1 >= 0)
+        if(galaktyka[n-1]==IMP)
+        {
+            unionImp(n,n-1);
+        }
+    const int SKOK = dlx*dly;
+    if(x+SKOK <= dlx*dly*(dlz-1))
 }
 
 void symuluj()
