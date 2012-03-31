@@ -84,17 +84,18 @@ void unionImp(int x, int y)
 */
 void sprawdzSasiadow(int n)
 {
-    if(n+dlx <= n+(dlx*(dly-1)))
+    const int MAXSYSTEM = dlx*dly*dlz-1;
+    if(n+dlx <= MAXSYSTEM)
         if(galaktyka[n+dlx]==IMP)
         {
             unionImp(n,n+dlx);
         }
-    if(n-dlx >= n)
+    if(n-dlx >= 0)
         if(galaktyka[n-dlx]==IMP)
         {
             unionImp(n,n-dlx);
         }
-    if(n+1 <= dlx-1)
+    if(n+1 <= MAXSYSTEM)
         if(galaktyka[n+1]==IMP)
         {
             unionImp(n,n+1);
@@ -105,7 +106,16 @@ void sprawdzSasiadow(int n)
             unionImp(n,n-1);
         }
     const int SKOK = dlx*dly;
-    if(x+SKOK <= dlx*dly*(dlz-1))
+    if(n+SKOK <= MAXSYSTEM)
+        if(galaktyka[n+SKOK]==IMP)
+        {
+            unionImp(n,n+SKOK);
+        }
+    if(n-SKOK >= 0)
+        if(galaktyka[n-SKOK]==IMP)
+        {
+            unionImp(n,n-SKOK);
+        }
 }
 
 void symuluj()
