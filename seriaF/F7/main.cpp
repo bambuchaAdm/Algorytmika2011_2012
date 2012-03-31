@@ -24,6 +24,7 @@ enum strona
 int dlx, dly, dlz;
 int lmiesiecy;
 int lSkladowychImp;
+int lmiesNieSpoj;
 
 vector< vector< vector<strona > > > galaktyka;
 vector< vector<int> > wojna;
@@ -65,13 +66,14 @@ int findRoot(int n)
     return parent[n];
 }
 
-void printOutput(int x, int y)
+void unionImp(int x, int y)
 {
     xRoot = findRoot(x);
     yRoot = findRoot(y);
     if(xRoot != yRoot)
     {
-
+        lSkladowychImp--;
+        parent[xRoot]=yRoot;
     }
 }
 
