@@ -23,13 +23,21 @@ enum strona
 
 int dlx, dly, dlz;
 int lmiesiecy;
+int lSkladowychImp;
 
 vector< vector< vector<strona > > > galaktyka;
 vector< vector<int> > wojna;
+vector<int> parent;
 
 void readInput()
 {
     scanf("%d %d %d %d",&dlx,&dly,&dlz,&lmiesiecy);
+    const int MAXSEKTOROW = dlx*dly*dlz;
+    parent.resize(MAXSEKTOROW);
+    for(int i=0;i<MAXSEKTOROW;i++)
+    {
+        parent[i] = i;
+    }
     galaktyka.resize(dlx);    //ciekawe czy to sie da rozszerzyc odpowiednio uzywajac jednej templatki?
     for(int i=0;i<dlx;i++)
     {
@@ -48,6 +56,11 @@ void readInput()
     }
 }
 
+int findRoot(int n)
+{
+    if()
+}
+
 void printOutput()
 {
 
@@ -55,13 +68,18 @@ void printOutput()
 
 void clean()
 {
-
+    wojna.clear();
+    galaktyka.clear();
+    paren.clear();
+    lSkladowychImp = 0;
 }
 
+#ifndef NDEBUG
 void test()
 {
 
 }
+#endif
 
 int main()
 {
