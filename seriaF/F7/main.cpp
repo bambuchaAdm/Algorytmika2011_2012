@@ -25,6 +25,7 @@ int dlx, dly, dlz;
 int lmiesiecy;
 
 vector< vector< vector<strona > > > galaktyka;
+vector< vector<int> > wojna;
 
 void readInput()
 {
@@ -33,6 +34,17 @@ void readInput()
     for(int i=0;i<dlx;i++)
     {
         galaktyka[i].resize(dly,vector<strona>(dlz,REB));
+    }
+    wojna.resize(lmiesiecy);
+    for(int i=0;i<lmiesiecy;i++)
+    {
+        int lsektorow;
+        scanf("%d",&lsektorow);
+        wojna[i].resize(lsektorow);
+        for(int j=0;j<lsektorow;j++)
+        {
+            scanf("%d",&wojna[i][j]);
+        }
     }
 }
 
