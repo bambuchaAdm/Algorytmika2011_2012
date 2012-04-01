@@ -11,7 +11,7 @@
 #include <vector>
 #include <cassert>
 
-//#define NDEBUG
+#define NDEBUG
 
 using namespace std;
 
@@ -25,6 +25,7 @@ int dlx, dly, dlz;
 int lmiesiecy;
 int lSkladowychImp;
 int lmiesNieSpoj;
+int krok[3] = {1};
 
 vector<strona> galaktyka;
 vector< vector<int> > wojna;
@@ -34,6 +35,8 @@ void readInput()
 {
     scanf("%d %d %d %d",&dlx,&dly,&dlz,&lmiesiecy);
     const int MAXSEKTOROW = dlx*dly*dlz;
+    krok[1] = dlx;
+    krok[2] = dlx*dly;
     parent.resize(MAXSEKTOROW);
     for(int i=0;i<MAXSEKTOROW;i++)
     {
@@ -85,59 +88,36 @@ void unionImp(int x, int y)
 void sprawdzSasiadow(int n)
 {
     const int MAXSYSTEM = dlx*dly*dlz-1;
-    if(n+dlx <= MAXSYSTEM)
-        if(galaktyka[n+dlx]==IMP)
-        {
-            unionImp(n,n+dlx);
-        }
-    if(n-dlx >= 0)
-        if(galaktyka[n-dlx]==IMP)
-        {
-            unionImp(n,n-dlx);
-        }
-    if(n+1 <= MAXSYSTEM)
-        if(galaktyka[n+1]==IMP)
-        {
-            unionImp(n,n+1);
-        }
-    if(n-1 >= 0)
-        if(galaktyka[n-1]==IMP)
-        {
-            unionImp(n,n-1);
-        }
-    const int SKOK = dlx*dly;
-    if(n+SKOK <= MAXSYSTEM)
-        if(galaktyka[n+SKOK]==IMP)
-        {
-            unionImp(n,n+SKOK);
-        }
-    if(n-SKOK >= 0)
-        if(galaktyka[n-SKOK]==IMP)
-        {
-            unionImp(n,n-SKOK);
-        }
+    for(int i = 0 ; i < 3 ; ++i)
+    {
+	if(n + krok[i] <= MAXSYSTEM)
+	    if(galaktyka[n+krok[i]]==IMP)
+	    {
+		unionImp(n,n+krok[i]);
+	    }
+	if(n - krok[i] >= 0)
+	    if(galaktyka[n-krok[i]]==IMP)
+	    {
+		unionImp(n,n-krok[i]);
+	    }
+    }
 }
 
 void symuluj()
 {
-    /*for(vector< vector<strona> >::reverse_iterator it=wojna.rbegin();it!=wojna.rend();it++) //dostaje jakieś dzikie błędy z STL-a i jest za późno na to, żebym kminił o co chodzi.
+    typedef vector< vector<int> >::reverse_iterator riter;
+    typedef vector<int>::iterator iter;
+//dostaje jakieś dzikie błędy z STL-a i jest za późno na to, żebym kminił o co chodzi.
+
+//Bo typy się nie zgadzały faktycznie...
+//Miałeś vector<vector<strona>> zamiast vector<vector<int>>
+    for(riter it=wojna.rbegin() ; it != wojna.rend() ; it++) 
     {
-        for(int i=0;i<(*it).size();i++)
+        for(iter i = it->begin() ; i != it->end() ; ++i)
         {
-            galaktyka[((*it)[i])] = IMP;
+            galaktyka[*i] = IMP;
             lSkladowychImp++;
-            sprawdzSasiadow(((*it)[i]));
-        }
-        if(lSkladowychImp!=0)
-            lmiesNieSpoj++;
-    }*/
-    for(int j=wojna.size()-1;j>=0;j--)
-    {
-        for(int i=0;i<wojna[j].size();i++)
-        {
-            galaktyka[wojna[j][i]] = IMP;
-            lSkladowychImp++;
-            sprawdzSasiadow(wojna[j][i]);
+            sprawdzSasiadow(*i);
         }
         if(lSkladowychImp!=1)
             lmiesNieSpoj++;
