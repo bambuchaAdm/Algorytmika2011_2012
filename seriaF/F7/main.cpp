@@ -23,8 +23,8 @@ enum strona
 
 int dlx, dly, dlz;
 int lmiesiecy;
-int lSkladowychImp;
-int lmiesNieSpoj;
+int lSkladowychImp = 0;
+int lmiesNieSpoj = 0;
 int krok[3] = {1};
 
 vector<strona> galaktyka;
@@ -111,7 +111,7 @@ void symuluj()
 
 //Bo typy się nie zgadzały faktycznie...
 //Miałeś vector<vector<strona>> zamiast vector<vector<int>>
-    for(riter it=wojna.rbegin() ; it != wojna.rend() ; it++) 
+    for(riter it=wojna.rbegin() ; it != wojna.rend() ; it++)
     {
         for(iter i = it->begin() ; i != it->end() ; ++i)
         {
@@ -130,6 +130,7 @@ void clean()
     galaktyka.clear();
     parent.clear();
     lSkladowychImp = 0;
+    lmiesNieSpoj = 0;
 }
 
 #ifndef NDEBUG
