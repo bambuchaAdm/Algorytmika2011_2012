@@ -95,7 +95,7 @@ void sprawdzSasiadow(int n)
 	    {
 		unionImp(n,n+krok[i]);
 	    }
-	if(n - krok[1] >= 0)
+	if(n - krok[i] >= 0)
 	    if(galaktyka[n-krok[i]]==IMP)
 	    {
 		unionImp(n,n-krok[i]);
