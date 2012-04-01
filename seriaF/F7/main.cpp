@@ -139,7 +139,7 @@ void symuluj()
             lSkladowychImp++;
             sprawdzSasiadow(wojna[j][i]);
         }
-        if(lSkladowychImp!=0)
+        if(lSkladowychImp!=1)
             lmiesNieSpoj++;
     }
 }
