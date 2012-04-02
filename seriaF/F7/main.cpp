@@ -102,22 +102,22 @@ void sprawdzSasiadow(int n)
 	    }
     }*/ //jednak to bardziej skomplikowane.
     if(n+dlx <= MAXSYSTEM)
-        if(galaktyka[n+dlx]==IMP && n%(dlx*dlz) < dlx*dlz - dlx)
+        if(galaktyka[n+dlx]==IMP && n%(dlx*dly) < dlx*dly - dlx)
         {
             unionImp(n,n+dlx);
         }
     if(n-dlx >= 0)
-        if(galaktyka[n-dlx]==IMP && n%(dlx*dlz) >= dlx)
+        if(galaktyka[n-dlx]==IMP && n%(dlx*dly) >= dlx)
         {
             unionImp(n,n-dlx);
         }
     if(n+1 <= MAXSYSTEM)
-        if(galaktyka[n+1]==IMP && ((n%(dlx*dlz))%dlx) != dlx-1)
+        if(galaktyka[n+1]==IMP && ((n%(dlx*dly))%dlx) != dlx-1)
         {
             unionImp(n,n+1);
         }
     if(n-1 >= 0)
-        if(galaktyka[n-1]==IMP && ((n%(dlx*dlz))%dlx) != 0)
+        if(galaktyka[n-1]==IMP && ((n%(dlx*dly))%dlx) != 0)
         {
             unionImp(n,n-1);
         }
