@@ -123,12 +123,12 @@ void sprawdzSasiadow(int n)
         }
     const int SKOK = dlx*dly;
     if(n+SKOK <= MAXSYSTEM)
-        if(galaktyka[n+SKOK]==IMP && n < (dly-1)*dlx*dlz)
+        if(galaktyka[n+SKOK]==IMP && n < (dlz-1)*SKOK)
         {
             unionImp(n,n+SKOK);
         }
     if(n-SKOK >= 0)
-        if(galaktyka[n-SKOK]==IMP && n >= dlx*dlz)
+        if(galaktyka[n-SKOK]==IMP && n >= SKOK)
         {
             unionImp(n,n-SKOK);
         }
