@@ -88,7 +88,7 @@ void unionImp(int x, int y)
 void sprawdzSasiadow(int n)
 {
     const int MAXSYSTEM = dlx*dly*dlz-1;
-    for(int i = 0 ; i < 3 ; ++i)
+    /*for(int i = 0 ; i < 3 ; ++i)
     {
 	if(n + krok[i] <= MAXSYSTEM)
 	    if(galaktyka[n+krok[i]]==IMP)
@@ -100,17 +100,44 @@ void sprawdzSasiadow(int n)
 	    {
 		unionImp(n,n-krok[i]);
 	    }
-    }
+    }*/ //jednak to bardziej skomplikowane.
+    if(n+dlx <= MAXSYSTEM)
+        if(galaktyka[n+dlx]==IMP && n%(dlx*dlz) < dlx*dlz - dlx)
+        {
+            unionImp(n,n+dlx);
+        }
+    if(n-dlx >= 0)
+        if(galaktyka[n-dlx]==IMP && n%(dlx*dlz) >= dlx)
+        {
+            unionImp(n,n-dlx);
+        }
+    if(n+1 <= MAXSYSTEM)
+        if(galaktyka[n+1]==IMP && ((n%(dlx*dlz))%dlx) != dlx-1)
+        {
+            unionImp(n,n+1);
+        }
+    if(n-1 >= 0)
+        if(galaktyka[n-1]==IMP && ((n%(dlx*dlz))%dlx) != 0)
+        {
+            unionImp(n,n-1);
+        }
+    const int SKOK = dlx*dly;
+    if(n+SKOK <= MAXSYSTEM)
+        if(galaktyka[n+SKOK]==IMP && n < (dly-1)*dlx*dlz)
+        {
+            unionImp(n,n+SKOK);
+        }
+    if(n-SKOK >= 0)
+        if(galaktyka[n-SKOK]==IMP && n >= dlx*dlz)
+        {
+            unionImp(n,n-SKOK);
+        }
 }
 
 void symuluj()
 {
     typedef vector< vector<int> >::reverse_iterator riter;
     typedef vector<int>::iterator iter;
-//dostaje jakieś dzikie błędy z STL-a i jest za późno na to, żebym kminił o co chodzi.
-
-//Bo typy się nie zgadzały faktycznie...
-//Miałeś vector<vector<strona>> zamiast vector<vector<int>>
     for(riter it=wojna.rbegin() ; it != wojna.rend() ; it++)
     {
         for(iter i = it->begin() ; i != it->end() ; ++i)
@@ -119,7 +146,7 @@ void symuluj()
             lSkladowychImp++;
             sprawdzSasiadow(*i);
         }
-        if(lSkladowychImp!=1)
+        if(lSkladowychImp>1)
             lmiesNieSpoj++;
     }
 }
