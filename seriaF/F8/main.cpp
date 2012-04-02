@@ -98,7 +98,7 @@ void test()
 void readInput()
 {
     cin >> dlx >> dly >> dlz >> lkabli;
-    const int MAX = lkabli;
+    const int MAX = lkabli+1000;
     kable.resize(MAX);
     parent.resize(MAX);
     for(int i=0;i<lkabli;i++)
@@ -124,7 +124,7 @@ int Find(int x)
     return parent[x];
 }
 
-void Union(int x, int y)
+void unionBiegun(int x, int y)
 {
     int xRoot = Find(x);
     int yRoot = Find(y);
@@ -135,7 +135,6 @@ void Union(int x, int y)
 void przegladaj(Direction a,Direction b,Direction c)
 {
     vector<Kabel> kable1 = kable;
-    //kable1.resize(lkabli); Nie jest potrzebne z racji wcze¶niejszej operacji
     sort(kable1.begin(), kable1.end(), dim(a));
     int idxp = 0;
     int idxk = 0;
@@ -155,7 +154,7 @@ void przegladaj(Direction a,Direction b,Direction c)
         {
             for(int i=idxp; i<idxk-1;i++)
             {
-                Union(kable1[i].ID,kable1[i+1].ID);
+                unionBiegun(kable1[i].ID,kable1[i+1].ID);
             }
         }
         idxp = idxk;
@@ -205,9 +204,9 @@ int main()
     {
         readInput();
         laczKable();
-#ifndef NDEBUG
+        #ifndef NDEBUG
         test();
-#endif
+        #endif
         clean();
     }
 }

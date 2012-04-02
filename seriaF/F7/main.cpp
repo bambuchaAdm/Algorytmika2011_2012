@@ -25,7 +25,6 @@ int dlx, dly, dlz;
 int lmiesiecy;
 int lSkladowychImp = 0;
 int lmiesNieSpoj = 0;
-int krok[3] = {1};
 
 vector<strona> galaktyka;
 vector< vector<int> > wojna;
@@ -35,8 +34,6 @@ void readInput()
 {
     scanf("%d %d %d %d",&dlx,&dly,&dlz,&lmiesiecy);
     const int MAXSEKTOROW = dlx*dly*dlz;
-    krok[1] = dlx;
-    krok[2] = dlx*dly;
     parent.resize(MAXSEKTOROW);
     for(int i=0;i<MAXSEKTOROW;i++)
     {
@@ -88,19 +85,6 @@ void unionImp(int x, int y)
 void sprawdzSasiadow(int n)
 {
     const int MAXSYSTEM = dlx*dly*dlz-1;
-    /*for(int i = 0 ; i < 3 ; ++i)
-    {
-	if(n + krok[i] <= MAXSYSTEM)
-	    if(galaktyka[n+krok[i]]==IMP)
-	    {
-		unionImp(n,n+krok[i]);
-	    }
-	if(n - krok[i] >= 0)
-	    if(galaktyka[n-krok[i]]==IMP)
-	    {
-		unionImp(n,n-krok[i]);
-	    }
-    }*/ //jednak to bardziej skomplikowane.
     if(n+dlx <= MAXSYSTEM)
         if(galaktyka[n+dlx]==IMP && n%(dlx*dly) < dlx*dly - dlx)
         {
