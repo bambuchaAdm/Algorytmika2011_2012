@@ -1,0 +1,9 @@
+digraph
+{
+	2->3[label="c 1"];
+	3->5[label="t 2"];
+	1->5[label="f 3"];
+	4->1[label="t 4"];
+	1->3[label="t 5"];
+	4->2[label="t 6"];
+}
