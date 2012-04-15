@@ -1,6 +1,6 @@
 /**
 *   Author: Adam Piekarczyk
-*   Project Title: G1 - Naszyjnik2
+*   Project Title: G1 - Hymn
 *   School Year: 2011/2012
 *   School: VLO Kraków
 *   Class: 1e
@@ -27,8 +27,8 @@ void test(const int *t, int rozmiar)
 
 int minPeriod(const char *s)
 {
-    int *ps = new int(strlen(s)); //ps - tablica prefikso-sufiksowa
-    ps[0] = -1; //czemu? dla wygody, ale nie jeste pewien
+    int *ps = new int[strlen(s) + 1]; //ps - tablica prefikso-sufiksowa
+    ps[0] = -1;
     ps[1] = 0;
     int idx = 0; //lazimy tym po wzorcu
     for(int i=2; s[i]; i++)
@@ -42,7 +42,7 @@ int minPeriod(const char *s)
     #ifndef NDEBUG
     test(ps,strlen(s));
     #endif
-    return strlen(s)/(strlen(s) - ps[strlen(s)-1] -1);
+    return strlen(s)/(strlen(s) - ps[strlen(s)-1]-1);
 }
 
 void readInput()
