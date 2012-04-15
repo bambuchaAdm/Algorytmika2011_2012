@@ -50,7 +50,7 @@ int minPeriod(const char *s)
     #ifndef NDEBUG
     test(ps,strlen(s));
     #endif
-    return strlen(s) - ps[strlen(s) ];
+    return strlen(s)/(strlen(s) - ps[strlen(s)]);
 }
 
 void readInput()
