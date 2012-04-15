@@ -16,13 +16,22 @@
 
 using namespace std;
 
+#ifndef NDEBUG
+void test(const int *t, int rozmiar)
+{
+    for(int i=0;i<rozmiar;i++)
+        cout << t[i] << " ";
+    cout << endl;
+}
+#endif
+
 int minPeriod(const char *s)
 {
-    char *ps = new char(strlen(s)); //ps - tablica prefikso-sufiksowa
+    int *ps = new int(strlen(s)); //ps - tablica prefikso-sufiksowa
     ps[0] = -1; //czemu? dla wygody, ale nie jeste pewien
     ps[1] = 0;
     int idx = 0; //lazimy tym po wzorcu
-    for(int i=2;i<strlen(ps);i++)
+    for(int i=2;i<strlen(s);i++)
     {
         if(s[i-1]==s[idx])
         {
@@ -39,9 +48,9 @@ int minPeriod(const char *s)
         }
     }
     #ifndef NDEBUG
-    test(ps);
+    test(ps,strlen(s));
     #endif
-    return strlen(s) - ps[strlen(s)];
+    return strlen(s) - ps[strlen(s) ];
 }
 
 void readInput()
@@ -50,15 +59,6 @@ void readInput()
     cin >> slowo;
     cout << minPeriod(slowo.c_str()) << endl;
 }
-
-#ifndef NDEBUG
-void test(const char *t)
-{
-    for(int i=0;i<strlen(t);i++)
-        cout << t[i] << " ";
-    cout << endl;
-}
-#endif
 
 int main()
 {
