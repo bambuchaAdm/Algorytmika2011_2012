@@ -27,11 +27,13 @@ void test(const int *t, int rozmiar)
 
 int minPeriod(const char *s)
 {
+    /*if(strlen(s)==2 && s[0]!=s[1])
+        return 1;*/
     int *ps = new int[strlen(s) + 1]; //ps - tablica prefikso-sufiksowa
     ps[0] = -1;
     ps[1] = 0;
     int idx = 0; //lazimy tym po wzorcu
-    for(int i=2; s[i]; i++)
+    for(int i=2; s[i] ; i++)
     {
         while(idx > 0 && s[idx+1] != s[i])
             idx = ps[idx];
