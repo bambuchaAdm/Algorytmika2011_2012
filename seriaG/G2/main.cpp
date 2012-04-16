@@ -11,7 +11,7 @@
 #include <vector>
 #include <cassert>
 
-#define NDEBUG
+//#define NDEBUG
 
 using namespace std;
 
@@ -50,6 +50,11 @@ void printTrue()
 void KMP(string wzo, string tekst, void (*onFound)())
 {
     vector<int> ps = computePrefixSufix(wzo);
+    #ifndef NDEBUG
+    for(int i=0;i<ps.size();i++)
+        cout << ps[i] << " ";
+    cout << endl;
+    #endif
     for(int i=0;i<tekst.size();i++)
     {
         int idx = 0;
@@ -81,8 +86,14 @@ void readInput()
     string a, b;
     cin >> a >> b;
     a = a + a;
+    #ifndef NDEBUG
+    cout << a  << endl << b << endl;
+    #endif
     KMP(b,a,printTrue);
     b = revString(b);
+    #ifndef NDEBUG
+    cout << b << endl;
+    #endif
     KMP(b,a,printTrue);
     printFalse();
 }
