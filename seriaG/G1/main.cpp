@@ -12,7 +12,7 @@
 #include <string>
 #include <cstring>
 
-#define NDEBUG
+//#define NDEBUG
 
 using namespace std;
 
@@ -32,7 +32,7 @@ int minPeriod(const char *s)
     ps.resize(DLS);
     ps[0] = 0;
     int idx = 0; //lazimy tym po wzorcu
-    for(int i=1;i<ps.size();i++)
+    for(int i=1;i<DLS;i++)
     {
         while(idx > 0 && s[idx] != s[i])
             idx = ps[idx];
