@@ -55,9 +55,9 @@ void KMP(string wzo, string tekst, void (*onFound)())
         cout << ps[i] << " ";
     cout << endl;
     #endif
+    int idx = 0;
     for(int i=0;i<tekst.size();i++)
     {
-        int idx = 0;
         while(idx > 0 && tekst[idx] != tekst[i])
             idx = ps[idx];
         if(wzo[idx]==tekst[i])
