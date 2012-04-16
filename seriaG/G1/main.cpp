@@ -29,21 +29,20 @@ int minPeriod(const char *s)
 {
     vector<int> ps; //ps - tablica prefikso-sufiksowa
     const int DLS = strlen(s);
-    ps.resize(DLS);
-    ps[0] = 0;
-    int idx = 0; //lazimy tym po wzorcu
-    for(int i=1;i<DLS;i++)
+    ps.resize(DLS+1);
+    ps[0] = -1;
+    int idx = -1; //lazimy tym po wzorcu
+    for(int i=1;i<=DLS;i++)
     {
-        while(idx > 0 && s[idx] != s[i])
+        while(idx > -1 && s[idx] != s[i-1])
             idx = ps[idx];
-        if(s[idx]==s[i])
-            idx++;
-        ps[i+1] = idx;
+        idx++;
+        ps[i] = idx;
     }
     #ifndef NDEBUG
     test(ps,DLS);
     #endif
-    return DLS/(DLS - ps[ps.size()-1]-1);
+    return DLS/(DLS - ps[DLS-1]-1);
 }
 
 void readInput()
