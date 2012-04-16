@@ -12,7 +12,7 @@
 #include <string>
 #include <cstring>
 
-#define NDEBUG
+//#define NDEBUG
 
 using namespace std;
 
@@ -38,7 +38,7 @@ int minPeriod(const char *s)
             idx = ps[idx];
         if(s[idx+1]==s[i])
             idx++;
-        ps[i] = idx;
+        ps[i] = idx+1;
     }
     #ifndef NDEBUG
     test(ps,DLS);
