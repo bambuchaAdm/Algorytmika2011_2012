@@ -12,7 +12,7 @@
 #include <string>
 #include <cstring>
 
-//#define NDEBUG
+#define NDEBUG
 
 using namespace std;
 
@@ -25,14 +25,13 @@ void test(vector<int> t, int rozmiar)
 }
 #endif
 
-int minPeriod(const char *s)
+int minPeriod(string s)
 {
     vector<int> ps; //ps - tablica prefikso-sufiksowa
-    const int DLS = strlen(s);
-    ps.resize(DLS+1);
+    ps.resize(s.size()+1);
     ps[0] = -1;
     int idx = -1; //lazimy tym po wzorcu
-    for(int i=1;i<=DLS;i++)
+    for(int i=1;i<=s.size();i++)
     {
         while(idx > -1 && s[idx] != s[i-1])
             idx = ps[idx];
@@ -40,16 +39,19 @@ int minPeriod(const char *s)
         ps[i] = idx;
     }
     #ifndef NDEBUG
-    test(ps,DLS);
+    test(ps,s.size());
     #endif
-    return DLS/(DLS - ps[DLS-1]-1);
+    if(s.size()%(s.size()-ps[s.size()])==0)
+        return s.size()/(s.size() - ps[s.size()]);
+    else
+        return 1;
 }
 
 void readInput()
 {
     string slowo;
     cin >> slowo;
-    cout << minPeriod(slowo.c_str()) << endl;
+    cout << minPeriod(slowo) << endl;
 }
 
 int main()
