@@ -20,6 +20,7 @@ bool flaga = true;
 
 vector<int> computePrefixSufix(string s)
 {
+    vector<int> ps;
     ps.resize(s.size()+1);
     ps[0] = -1;
     int idx = -1; //lazimy tym po wzorcu
@@ -33,15 +34,34 @@ vector<int> computePrefixSufix(string s)
     return ps;
 }
 
-bool KMP(string wzo, string tekst, bool (*onFound)())
+void printFalse()
+{
+    if(flaga)
+        cout << "ROZNE" << endl;
+}
+
+void printTrue()
+{
+    if(flaga)
+        cout << "IDENTYCZNE" << endl;
+    flaga = false;
+}
+
+void KMP(string wzo, string tekst, void (*onFound)())
 {
     vector<int> ps = computePrefixSufix(wzo);
     for(int i=0;i<tekst.size();i++)
     {
         int idx = 0;
-        while(idx > -1 && tekst[idx] != tekst[i-1])
+        while(idx > 0 && tekst[idx] != tekst[i])
             idx = ps[idx];
-        idx++;
+        if(wzo[idx]==tekst[i])
+            idx++;
+        if(wzo.size() == idx)
+        {
+            onFound();
+            idx = ps[idx];
+        }
     }
 }
 
@@ -65,20 +85,6 @@ void readInput()
     b = revString(b);
     KMP(b,a,printTrue);
     printFalse();
-}
-
-void printFalse()
-{
-    if(flaga)
-        cout << "ROZNE" << endl;
-}
-
-bool printTrue()
-{
-    if(flaga)
-        cout << "IDENTYCZNE" << endl;
-    flaga = false;
-    return false;
 }
 
 void clean()
