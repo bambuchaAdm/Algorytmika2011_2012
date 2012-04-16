@@ -15,19 +15,33 @@
 
 using namespace std;
 
-void readInput()
+int dlnaszyjnika=0;
+
+bool KMP(const char *wzo, const char *tekst, bool (*onFound)())
 {
 
 }
 
-void printOutput()
+void readInput()
 {
+    cin >> dlnaszyjnika;
 
+}
+
+void printFalse()
+{
+    cout << "ROZNE" << endl;
+}
+
+bool printTrue()
+{
+    cout << "IDENTYCZNE" << endl;
+    return false;
 }
 
 void clean()
 {
-
+    dlnaszyjnika = 0;
 }
 
 #ifndef NDEBUG
@@ -40,13 +54,12 @@ void test()
 int main()
 {
     int z;
-    scanf("%d",&z);
+    cin >> z;
     for(int i=0;i<z;i++)
     {
         readInput();
 
-        printOutput();
-        #ifndef
+        #ifndef NDEBUG
         //test();
         #endif
         clean();

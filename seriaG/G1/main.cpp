@@ -17,7 +17,7 @@
 using namespace std;
 
 #ifndef NDEBUG
-void test(const int *t, int rozmiar)
+void test(vector<int> t, int rozmiar)
 {
     for(int i=0;i<rozmiar;i++)
         cout << t[i] << " ";
@@ -27,13 +27,12 @@ void test(const int *t, int rozmiar)
 
 int minPeriod(const char *s)
 {
-    /*if(strlen(s)==2 && s[0]!=s[1])
-        return 1;*/
-    int *ps = new int[strlen(s) + 1]; //ps - tablica prefikso-sufiksowa
-    ps[0] = -1;
-    ps[1] = 0;
+    vector<int> ps; //ps - tablica prefikso-sufiksowa
+    const int DLS = strlen(s);
+    ps.resize(DLS);
+    ps[0] = 0;
     int idx = 0; //lazimy tym po wzorcu
-    for(int i=2; s[i] ; i++)
+    for(int i=2;i<ps.size();i++)
     {
         while(idx > 0 && s[idx+1] != s[i])
             idx = ps[idx];
@@ -42,9 +41,9 @@ int minPeriod(const char *s)
         ps[i] = idx;
     }
     #ifndef NDEBUG
-    test(ps,strlen(s));
+    test(ps,DLS);
     #endif
-    return strlen(s)/(strlen(s) - ps[strlen(s)-1]-1);
+    return DLS/(DLS - ps[ps.size()-1]-1);
 }
 
 void readInput()
