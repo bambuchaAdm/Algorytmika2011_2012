@@ -52,25 +52,31 @@ void KMP(string wzo, string tekst, void (*onFound)(int))
 {
     vector<int> ps = computePrefixSufix(wzo);
     int idx = 0;
-    for(int i=0;i<tekst.size()-wzo.size();i++)
+    for(int i=0;i<tekst.size();i++)
     {
         if(wzo[idx]==tekst[i+idx])
+        {
             idx++;
-        if(idx==wzo.size())
-            onFound(i-idx);
+            if(idx==wzo.size())
+            {
+                onFound(i-idx+1);
+                idx = ps[idx];
+            }
+        }
         else
         {
             i = i + idx - ps[idx];
             if(idx>0)
                 idx = ps[idx];
         }
+        cout << i << " " << idx << endl;
     }
     cerr << "KMP DONE" << endl;
 }
 
 void wywalPozycje(int i)
 {
-    cout << "ZNALEZIONO NA" << i << endl;
+    cout << "ZNALEZIONO NA " << i << endl;
 }
 
 string revString(string n)
