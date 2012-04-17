@@ -21,27 +21,31 @@ bool flaga = false;
 
 bool computePrefixSufix(const char *s)
 {
+    const int MAX = 3*dlnaszyjnika+1;
     vector<int> ps;
-    ps.resize(dlnaszyjnika);
+    ps.resize(MAX);
     ps[0] = 0;
     int idx = 0; //lazimy tym po wzorcu
-    for(int i=2;i<dlnaszyjnika;i++)
+    for(int i=2;i<MAX;i++)
     {
-        while(idx > 0 && s[idx]!=s[i])
+        while(idx > 0 && s[idx]!=s[i-1])
         {
             idx = ps[idx];
             if(idx==dlnaszyjnika)
-            {
-                return true;
-            }
+        {
+            return true;
         }
-        if(s[idx]==s[i])
+        }
+        if(s[idx]==s[i-1])
             idx++;
         if(idx==dlnaszyjnika)
         {
             return true;
         }
-        ps[i] = idx;
+        if(i==MAX || s[i]!=s[idx])
+            ps[i]=idx;
+        else
+            ps[i] = ps[idx];
     }
     return false;
 }
@@ -64,16 +68,10 @@ void readInput()
         b[i+2*dlnaszyjnika+1] = revb[i+dlnaszyjnika+1] = b[i+dlnaszyjnika+1];
         revb[i+2*dlnaszyjnika+1] = revb[i+dlnaszyjnika+1];
     }
-    flaga = computePrefixSufix(b);
-    if(flaga)
+    if(computePrefixSufix(b) || computePrefixSufix(revb))
         cout << "IDENTYCZNE" << endl;
     else
-    {
-        if(computePrefixSufix(revb))
-            cout << "IDENTYCZNE" << endl;
-        else
-            cout << "ROZNE" << endl;
-    }
+        cout << "ROZNE" << endl;
 }
 
 void clean()
