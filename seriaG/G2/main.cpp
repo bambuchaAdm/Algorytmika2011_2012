@@ -12,6 +12,7 @@
 #include <cassert>
 
 //#define NDEBUG
+//#define NGENERATE
 
 using namespace std;
 
@@ -54,6 +55,11 @@ void printTrue()
 void KMP(string wzo, string tekst, void (*onFound)())
 {
     vector<int> ps = computePrefixSufix(wzo);
+    #ifndef NGENERATE
+    for(int i=0;i<ps.size();i++)
+        cerr << ps[i] << " ";
+    cerr << endl;
+    #endif
     int idx = 0;
     for(int i=0;i<tekst.size();i++)
     {
