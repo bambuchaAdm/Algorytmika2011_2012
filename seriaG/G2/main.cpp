@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <vector>
 #include <cassert>
+#include <cstring>
 
 #define NDEBUG
 #define NGENERATE
@@ -33,60 +34,7 @@ vector<int> computePrefixSufix(const char *s)
             idx++;
         ps[i] = idx;
     }
-    #ifndef NDEBUG
-    cerr << "PS COMPUTED" << endl;
-    #endif
     return ps;
-}
-
-void printFalse()
-{
-    if(flaga)
-        cout << "ROZNE" << endl;
-}
-
-void printTrue()
-{
-    if(flaga)
-        cout << "IDENTYCZNE" << endl;
-    flaga = false;
-}
-
-void KMP(const char *wzo, const char *tekst, void (*onFound)())
-{
-    const int DLTEKSTU = dlnaszyjnika * 2;
-    vector<int> ps = computePrefixSufix(wzo);
-    #ifndef NGENERATE
-    for(int i=0;i<ps.size();i++)
-        cerr << ps[i] << " ";
-    cerr << endl;
-    #endif
-    int idx = 0;
-    for(int i=0;i<DLTEKSTU;i++)
-    {
-        while(idx>0 && wzo[idx+1]!=tekst[i])
-            idx = ps[idx];
-        if(wzo[idx+1]==tekst[i])
-            idx++;
-        if(idx == dlnaszyjnika-1)
-        {
-            onFound();
-            idx = ps[idx];
-        }
-    }
-    #ifndef NDEBUG
-    cerr << "KMP DONE" << endl;
-    #endif
-}
-
-string revString(string n)
-{
-    string wynik;
-    for(int i=0;i<n.size();i++)
-    {
-        wynik = n[i] + wynik;
-    }
-    return wynik;
 }
 
 void readInput()
@@ -105,19 +53,6 @@ void readInput()
         cin >> b[i];
         revb[dlnaszyjnika-i-1] = b[i];
     }
-    KMP(b,a,printTrue);
-    #ifndef NDEBUG
-    cerr << "KMP 1 DONE" << endl;
-    #endif
-    //b = revString(b);
-    #ifndef NDEBUG
-    cerr << "REVERT STRING DONE" << endl;
-    #endif
-    KMP(revb,a,printTrue);
-    #ifndef NDEBUG
-    cerr << "KMP 2 DONE" << endl;
-    #endif
-    printFalse();
 }
 
 void clean()
