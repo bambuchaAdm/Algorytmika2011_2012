@@ -11,8 +11,8 @@
 #include <vector>
 #include <cassert>
 
-//#define NDEBUG
-//#define NGENERATE
+#define NDEBUG
+#define NGENERATE
 
 using namespace std;
 
@@ -25,7 +25,7 @@ vector<int> computePrefixSufix(string s)
     ps.resize(s.size());
     ps[0] = 0;
     int idx = 0; //lazimy tym po wzorcu
-    for(int i=1;i<s.size();i++)
+    for(int i=2;i<s.size();i++)
     {
         while(idx > 0 && s[idx]!=s[i])
             idx = ps[idx];
