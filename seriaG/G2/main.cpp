@@ -19,13 +19,13 @@ using namespace std;
 int dlnaszyjnika=0;
 bool flaga = true;
 
-vector<int> computePrefixSufix(string s)
+vector<int> computePrefixSufix(const char *s)
 {
     vector<int> ps;
-    ps.resize(s.size());
+    ps.resize(dlnaszyjnika);
     ps[0] = 0;
     int idx = 0; //lazimy tym po wzorcu
-    for(int i=2;i<s.size();i++)
+    for(int i=2;i<dlnaszyjnika;i++)
     {
         while(idx > 0 && s[idx]!=s[i])
             idx = ps[idx];
@@ -52,8 +52,9 @@ void printTrue()
     flaga = false;
 }
 
-void KMP(string wzo, string tekst, void (*onFound)())
+void KMP(const char *wzo, const char *tekst, void (*onFound)())
 {
+    const int DLTEKSTU = dlnaszyjnika * 2;
     vector<int> ps = computePrefixSufix(wzo);
     #ifndef NGENERATE
     for(int i=0;i<ps.size();i++)
@@ -61,13 +62,13 @@ void KMP(string wzo, string tekst, void (*onFound)())
     cerr << endl;
     #endif
     int idx = 0;
-    for(int i=0;i<tekst.size();i++)
+    for(int i=0;i<DLTEKSTU;i++)
     {
         while(idx>0 && wzo[idx+1]!=tekst[i])
             idx = ps[idx];
         if(wzo[idx+1]==tekst[i])
             idx++;
-        if(idx == wzo.size()-1)
+        if(idx == dlnaszyjnika-1)
         {
             onFound();
             idx = ps[idx];
@@ -90,19 +91,29 @@ string revString(string n)
 
 void readInput()
 {
+    char a[2000001];
+    char b[2000001];
+    char revb[2000001];
     cin >> dlnaszyjnika;
-    string a, b;
-    cin >> a >> b;
-    a = a + a;
+    for(int i=0;i<dlnaszyjnika;i++)
+    {
+        cin >> a[i];
+        a[dlnaszyjnika+i] = a[i];
+    }
+    for(int i=0;i<dlnaszyjnika;i++)
+    {
+        cin >> b[i];
+        revb[dlnaszyjnika-i-1] = b[i];
+    }
     KMP(b,a,printTrue);
     #ifndef NDEBUG
     cerr << "KMP 1 DONE" << endl;
     #endif
-    b = revString(b);
+    //b = revString(b);
     #ifndef NDEBUG
     cerr << "REVERT STRING DONE" << endl;
     #endif
-    KMP(b,a,printTrue);
+    KMP(revb,a,printTrue);
     #ifndef NDEBUG
     cerr << "KMP 2 DONE" << endl;
     #endif
