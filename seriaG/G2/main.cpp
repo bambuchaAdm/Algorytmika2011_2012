@@ -11,16 +11,17 @@
 #include <vector>
 #include <cassert>
 
-#define NDEBUG
+//#define NDEBUG
 
 using namespace std;
 
 int dlnaszyjnika=0;
-bool flaga = false;
-vector<int> ps;
+bool flaga = true;
 
-bool computePrefixSufix(string s)
+vector<int> computePrefixSufix(string s)
 {
+    vector<int> ps;
+    ps.resize(s.size()+1);
     ps[0] = -1;
     int idx = -1; //lazimy tym po wzorcu
     for(int i=1;i<=s.size();i++)
@@ -29,29 +30,78 @@ bool computePrefixSufix(string s)
             idx = ps[idx];
         idx++;
         ps[i] = idx;
-        if(ps[i] == dlnaszyjnika)
-            return true;
     }
-    return false;
+    return ps;
+}
+
+void printFalse()
+{
+    if(flaga)
+        cout << "ROZNE" << endl;
+}
+
+void printTrue()
+{
+    if(flaga)
+        cout << "IDENTYCZNE" << endl;
+    flaga = false;
+}
+
+void KMP(string wzo, string tekst, void (*onFound)())
+{
+    vector<int> ps = computePrefixSufix(wzo);
+    #ifndef NDEBUG
+    for(int i=0;i<ps.size();i++)
+        cout << ps[i] << " ";
+    cout << endl;
+    #endif
+    int idx = 0;
+    for(int i=0;i<tekst.size();i++)
+    {
+        while(idx > 0 && tekst[idx] != tekst[i])
+            idx = ps[idx];
+        if(wzo[idx]==tekst[i])
+            idx++;
+        if(wzo.size() == idx)
+        {
+            onFound();
+            idx = ps[idx];
+        }
+    }
+}
+
+string revString(string n)
+{
+    string wynik;
+    for(int i=0;i<n.size();i++)
+    {
+        wynik = n[i] + wynik;
+    }
+    return wynik;
 }
 
 void readInput()
 {
-    flaga = false;
     cin >> dlnaszyjnika;
-    ps.resize(dlnaszyjnika+10);
     string a, b;
     cin >> a >> b;
-    string temp = a + '#' + b + b;
-    flaga = computePrefixSufix(temp);
-    for(int i=0;i<dlnaszyjnika;i++)
-    {temp = a[dlnaszyjnika-1-i];
-    if(!flaga)
-        flaga = computePrefixSufix(temp);}
-    if(flaga)
-        cout <<"IDENTYCZNE" << endl;
-    else
-        cout << "ROZNE" << endl;
+    a = a + a;
+    #ifndef NDEBUG
+    cout << a  << endl << b << endl;
+    #endif
+    KMP(b,a,printTrue);
+    b = revString(b);
+    #ifndef NDEBUG
+    cout << b << endl;
+    #endif
+    KMP(b,a,printTrue);
+    printFalse();
+}
+
+void clean()
+{
+    dlnaszyjnika = 0;
+    flaga = true;
 }
 
 #ifndef NDEBUG
@@ -69,5 +119,9 @@ int main()
     for(int i=0;i<z;i++)
     {
         readInput();
+        #ifndef NDEBUG
+        //test();
+        #endif
+        clean();
     }
 }
