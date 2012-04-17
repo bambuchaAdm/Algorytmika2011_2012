@@ -54,22 +54,16 @@ void KMP(string wzo, string tekst, void (*onFound)(int))
     int idx = 0;
     for(int i=0;i<tekst.size();i++)
     {
-        if(wzo[idx]==tekst[i+idx])
-        {
+        while(idx>0 && wzo[idx+1]!=tekst[i])
+            idx = ps[idx];
+        if(wzo[idx+1]==tekst[i])
             idx++;
-            if(idx==wzo.size())
-            {
-                onFound(i-idx+1);
-                idx = ps[idx];
-            }
-        }
-        else
-        {
-            i = i + idx - ps[idx];
-            if(idx>0)
-                idx = ps[idx];
-        }
         cout << i << " " << idx << endl;
+        if(idx == wzo.size()-1)
+        {
+            onFound(i-wzo.size()+1);
+            idx = ps[idx];
+        }
     }
     cerr << "KMP DONE" << endl;
 }
