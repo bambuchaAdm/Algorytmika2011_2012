@@ -32,6 +32,9 @@ vector<int> computePrefixSufix(string s)
             idx++;
         ps[i] = idx;
     }
+    #ifndef NDEBUG
+    cerr << "PS COMPUTED" << endl;
+    #endif
     return ps;
 }
 
@@ -48,7 +51,7 @@ void printTrue()
     flaga = false;
 }
 
-void KMP(string wzo, string tekst, void (*onFound)(int))
+void KMP(string wzo, string tekst, void (*onFound)())
 {
     vector<int> ps = computePrefixSufix(wzo);
     int idx = 0;
@@ -58,19 +61,15 @@ void KMP(string wzo, string tekst, void (*onFound)(int))
             idx = ps[idx];
         if(wzo[idx+1]==tekst[i])
             idx++;
-        cout << i << " " << idx << endl;
         if(idx == wzo.size()-1)
         {
-            onFound(i-wzo.size()+1);
+            onFound();
             idx = ps[idx];
         }
     }
+    #ifndef NDEBUG
     cerr << "KMP DONE" << endl;
-}
-
-void wywalPozycje(int i)
-{
-    cout << "ZNALEZIONO NA " << i << endl;
+    #endif
 }
 
 string revString(string n)
@@ -85,15 +84,23 @@ string revString(string n)
 
 void readInput()
 {
-    //cin >> dlnaszyjnika;
+    cin >> dlnaszyjnika;
     string a, b;
     cin >> a >> b;
-    KMP(a,b,wywalPozycje);
-    /*a = a + a;
+    a = a + a;
     KMP(b,a,printTrue);
+    #ifndef NDEBUG
+    cerr << "KMP 1 DONE" << endl;
+    #endif
     b = revString(b);
+    #ifndef NDEBUG
+    cerr << "REVERT STRING DONE" << endl;
+    #endif
     KMP(b,a,printTrue);
-    printFalse();*/
+    #ifndef NDEBUG
+    cerr << "KMP 2 DONE" << endl;
+    #endif
+    printFalse();
 }
 
 void clean()
