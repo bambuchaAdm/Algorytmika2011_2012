@@ -21,14 +21,15 @@ bool flaga = true;
 vector<int> computePrefixSufix(string s)
 {
     vector<int> ps;
-    ps.resize(s.size()+1);
-    ps[0] = -1;
-    int idx = -1; //lazimy tym po wzorcu
-    for(int i=1;i<=s.size();i++)
+    ps.resize(s.size());
+    ps[0] = 0;
+    int idx = 0; //lazimy tym po wzorcu
+    for(int i=1;i<s.size();i++)
     {
-        while(idx > -1 && s[idx] != s[i-1])
+        while(idx > 0 && s[idx]!=s[i])
             idx = ps[idx];
-        idx++;
+        if(s[idx]==s[i])
+            idx++;
         ps[i] = idx;
     }
     return ps;
@@ -120,7 +121,7 @@ int main()
     {
         readInput();
         #ifndef NDEBUG
-        //test();
+        test();
         #endif
         clean();
     }
