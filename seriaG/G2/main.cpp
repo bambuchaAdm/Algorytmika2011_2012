@@ -13,14 +13,13 @@
 #include <cstring>
 
 #define NDEBUG
-#define NGENERATE
 
 using namespace std;
 
 int dlnaszyjnika=0;
-bool flaga = true;
+bool flaga = false;
 
-vector<int> computePrefixSufix(const char *s)
+bool computePrefixSufix(const char *s)
 {
     vector<int> ps;
     ps.resize(dlnaszyjnika);
@@ -29,36 +28,58 @@ vector<int> computePrefixSufix(const char *s)
     for(int i=2;i<dlnaszyjnika;i++)
     {
         while(idx > 0 && s[idx]!=s[i])
+        {
             idx = ps[idx];
+            if(idx==dlnaszyjnika)
+            {
+                return true;
+            }
+        }
         if(s[idx]==s[i])
             idx++;
+        if(idx==dlnaszyjnika)
+        {
+            return true;
+        }
         ps[i] = idx;
     }
-    return ps;
+    return false;
 }
 
 void readInput()
 {
-    char a[2000001];
-    char b[2000001];
-    char revb[2000001];
+    char b[3000001];
+    char revb[3000001];
     cin >> dlnaszyjnika;
-    for(int i=0;i<dlnaszyjnika;i++)
-    {
-        cin >> a[i];
-        a[dlnaszyjnika+i] = a[i];
-    }
     for(int i=0;i<dlnaszyjnika;i++)
     {
         cin >> b[i];
         revb[dlnaszyjnika-i-1] = b[i];
+    }
+    b[dlnaszyjnika] = '#';
+    revb[dlnaszyjnika] = '#';
+    for(int i=0;i<dlnaszyjnika;i++)
+    {
+        cin >> b[i+dlnaszyjnika+1];
+        b[i+2*dlnaszyjnika+1] = revb[i+dlnaszyjnika+1] = b[i+dlnaszyjnika+1];
+        revb[i+2*dlnaszyjnika+1] = revb[i+dlnaszyjnika+1];
+    }
+    flaga = computePrefixSufix(b);
+    if(flaga)
+        cout << "IDENTYCZNE" << endl;
+    else
+    {
+        if(computePrefixSufix(revb))
+            cout << "IDENTYCZNE" << endl;
+        else
+            cout << "ROZNE" << endl;
     }
 }
 
 void clean()
 {
     dlnaszyjnika = 0;
-    flaga = true;
+    flaga = false;
 }
 
 #ifndef NDEBUG
