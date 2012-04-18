@@ -1,8 +1,13 @@
 # depslib dependency file v1.0
-1332708928 source:/home/arccha/programowanie/cpp/algorytmika/seriaF/F8/main.cpp
+1333390889 source:/home/arccha/programowanie/cpp/algorytmika/seriaF/F8/main.cpp
 	<iostream>
 	<cstdio>
 	<vector>
 	<cassert>
+	<algorithm>
+
+1333459709 source:/home/arccha/programowanie/cpp/algorytmika/seriaF/F8/main1.cpp
+	<iostream>
+	<vector>
 	<algorithm>
 
